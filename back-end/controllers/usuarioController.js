@@ -19,41 +19,20 @@ module.exports = {
 			res.send("user nao encontrado");
 		}
 	},
-    new:  async (req, res) => {
-		let u = req.body;
-		let cpf = u.cpf;
-		let result = await Usuario.findOne({
-			where: {
-				cpf: cpf
-			}
+    new: async (req, res) => {		
+		const { cpf, ...data } = req.body;		
+					
+		let [result] = await Usuario.findOrCreate({
+			where: { cpf: cpf },
+			defaults: { ...data }
 		})
-		if( result == null ){
-			let user = await Usuario.create({
-				nome: u.nome,
-				idade: u.idade,
-				cpf:u.cpf,
-				rg:u.rg,
-				data_nasc:u.data_nasc,
-				cnpj:u.cnpj,
-				fornecedor:u.fornecedor,
-				email: u.email,
-				senha: u.senha,
-				cep:u.cep,
-				endereco:u.endereco,
-				numero:u.numero,
-				bairro:u.bairro,
-				cidade:u.cidade,
-				estado:u.estado,
-				telefone:u.telefone,
-				celular:u.celular
-			});
-			await user.save();
-			res.send(user);
+			
+		if(result !==  null){
+			return res.status(200).json(result);  
 		}else{
-			res.status(409);
-			res.send("usuario já cadastrado");
+			return res.status(400).json({ err });
 		}
-	},
+},
 	delete: async (req, res) => {
 		
 		let id = req.params.id;
