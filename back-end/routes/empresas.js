@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-const empresaController = require("../controllers/empresaController");
+const EmpresaController = require("../controllers/EmpresaController");
 
 
-router.get('/', empresaController.index);
-router.get("/cnpj/:cnpj",empresaController.search);
+router.get('/', EmpresaController.index);
+router.get("/cnpj/:cnpj",EmpresaController.search);
 
 module.exports = router;
