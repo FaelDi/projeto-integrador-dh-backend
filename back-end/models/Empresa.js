@@ -1,120 +1,120 @@
-module.exports = (sequelize,DataType) => {
+module.exports = (sequelize, DataType) => {
     const Empresa = sequelize.define("Empresa", {
         atividade_principal: {
-            type: Sequelize.STRING,
+            type: DataType.STRING,
             allowNull: false
-          },
-          data_situacao: {
-            type: Sequelize.STRING,
+        },
+        data_situacao: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          complemento: {
-            type: Sequelize.STRING,
+        },
+        complemento: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          nome: {
-            type: Sequelize.STRING,
+        },
+        nome: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          uf: {
-            type: Sequelize.STRING,
+        },
+        uf: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          telefone: {
-            type: Sequelize.STRING,
+        },
+        telefone: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          atividades_secundarias: {
-            type: Sequelize.STRING,
+        },
+        atividades_secundarias: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          qsa: {
-            type: Sequelize.STRING,
+        },
+        qsa: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          situacao: {
-            type: Sequelize.STRING,
+        },
+        situacao: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          bairro: {
-            type: Sequelize.STRING,
+        },
+        bairro: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          logradouro: {
-            type: Sequelize.STRING,
+        },
+        logradouro: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          numero: {
-            type: Sequelize.INTEGER,
+        },
+        numero: {
+            type: DataType.INTEGER,
             allowNull: false
-          },
-          cep: {
-            type: Sequelize.STRING,
+        },
+        cep: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          municipio: {
-            type: Sequelize.STRING,
+        },
+        municipio: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          porte: {
-            type: Sequelize.STRING,
+        },
+        porte: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          abertura: {
-            type: Sequelize.STRING,
+        },
+        abertura: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          natureza_juridica: {
-            type: Sequelize.STRING,
+        },
+        natureza_juridica: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          cnpj: {
-            type: Sequelize.STRING,
+        },
+        cnpj: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          ultima_atualizacao: {
-            type: Sequelize.STRING,
+        },
+        ultima_atualizacao: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          status: {
-            type: Sequelize.STRING,
+        },
+        status: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          tipo: {
-            type: Sequelize.STRING,
+        },
+        tipo: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          fantasia: {
-            type: Sequelize.STRING,
+        },
+        fantasia: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          email: {
-            type: Sequelize.STRING,
+        },
+        email: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          efr: {
-            type: Sequelize.STRING,
+        },
+        efr: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          motivo_situacao: {
-            type: Sequelize.STRING,
+        },
+        motivo_situacao: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          situacao_especial: {
-            type: Sequelize.STRING,
+        },
+        situacao_especial: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          data_situacao_especial: {
-            type: Sequelize.STRING,
+        },
+        data_situacao_especial: {
+            type: DataType.STRING,
             allowNull: false
-          },
-          capital_social: {
-            type: Sequelize.DECIMAL(20, 2),
+        },
+        capital_social: {
+            type: DataType.DECIMAL(20, 2),
             allowNull: false
-          }
-    },{
-        tableName:'empresa',
-        timestamps:true
+        }
+    }, {
+        tableName: 'empresa',
+        timestamps: true
     });
 
     // Permission.associate = function(models) {
