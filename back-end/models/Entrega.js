@@ -1,16 +1,16 @@
-module.exports = (sequelize,DataType) => {
+module.exports = (sequelize, DataType) => {
     const Entrega = sequelize.define("Entrega", {
         status: {
-            type: Sequelize.BOOLEAN,
+            type: DataType.BOOLEAN,
             allowNull: false
-          },
-          rastreamento: {
-            type: Sequelize.STRING,
+        },
+        rastreamento: {
+            type: DataType.STRING,
             allowNull: false
-          }
-    },{
-        tableName:'entrega',
-        timestamps:true
+        }
+    }, {
+        tableName: 'entrega',
+        timestamps: true
     });
 
     // Permission.associate = function(models) {
