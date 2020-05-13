@@ -2,15 +2,9 @@ const { Empresa, Usuario } = require("../models");
 const fetch = require("node-fetch");
 
 const buscaCnpj = async(cnpj) => {
-	try {
-		const res = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpj}`);
-		const data = res.json();
-		console.log(data);
+		let res = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpj}`);
+		const data =  await res.json();	
 		return data;
-		
-	} catch (e) {
-		console.error(e);
-	}
 }
 
 module.exports = {
@@ -35,18 +29,29 @@ module.exports = {
     const { id_usuario } = req.params;
 		const { cnpj } = req.body;  
 		
-		const dados = buscaCnpj(cnpj); 
-		console.log(dados);
-								
+		const { 
+			qsa,
+			atividade_principal, 
+			atividades_secundarias, 
+			...dados 
+		} = await buscaCnpj(cnpj);
+		dados.atividade_principal	= atividade_principal[0].text;
+		dados.atividades_secundarias	= atividades_secundarias[0].text;
+		dados.qsa	= qsa[0].nome;
+		dados.fk_usuario	= id_usuario;
+
+		console.log();
+		
+
 		const user = await Usuario.findByPk(id_usuario);
 		
     if(!user) {
       return res.status(400).json({ error: 'Usuario não encontrado!'});
 		}
 		
-    const empresa = await Empresa.create({ 
-       dados 
-    });
+
+    const empresa = await Empresa.create(dados);
+
     return res.json(empresa);
   },
 }

@@ -31,10 +31,10 @@ module.exports = (sequelize, DataType) => {
       as: 'pagamento'
     });
 
-    // Usuario.hasMany(models.Empresa, {
-    //   foreignKey: 'fk_usuario',
-    //   as: 'empresa'
-    // });
+    usuario.hasMany(models.Empresa, {
+      foreignKey: 'fk_usuario',
+      as: 'empresa'
+    });
   }
 
   return usuario;
