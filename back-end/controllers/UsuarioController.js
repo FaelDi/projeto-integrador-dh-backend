@@ -1,8 +1,12 @@
-const { Usuario } = require("../models");
+const { Usuario, Pagamento, Empresa } = require("../models");
 
 module.exports = {
 	index: async (req, res)=>{
-		let users = await Usuario.findAll();
+		let users = await Usuario.findAll({
+			include: [
+				{ model: Pagamento, as: 'pagamento' },
+			],
+		});
 		if(users !==  null){
 			res.send(users);
 		}else{

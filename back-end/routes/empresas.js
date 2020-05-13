@@ -5,6 +5,6 @@ const EmpresaController = require("../controllers/EmpresaController");
 
 
 router.get('/', EmpresaController.index);
-router.get("/cnpj/:cnpj",EmpresaController.search);
+router.post("/:id_usuario",EmpresaController.store);
 
 module.exports = router;

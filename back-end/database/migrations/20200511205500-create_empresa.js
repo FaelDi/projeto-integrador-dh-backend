@@ -118,7 +118,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      capital_social:Sequelize.DECIMAL(20, 2),
+      capital_social: Sequelize.DECIMAL(20, 2),
+      fk_usuario: {
+        type: Sequelize.INTEGER,
+        references: { model: 'usuario', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false
@@ -127,16 +134,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      fk_usuario: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'usuario',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false
-      }
     });
   },
 
