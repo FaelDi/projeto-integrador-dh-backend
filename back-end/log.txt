@@ -1,0 +1,7 @@
+O usuario entrou na url /n /empresas 
+ O usuario entrou na url  /empresas 
+ O usuario entrou na url  /empresas 
+ O usuario entrou na url  /empresas 
+ O usuario entrou na url  /empresas 
+ O usuario entrou na url  /usuarios 
+ O usuario entrou na url  /empresas

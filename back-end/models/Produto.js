@@ -1,19 +1,36 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define('Product', {
-    codigo: DataTypes.STRING,
-    valorUnitario: DataTypes.DECIMAL,
-    fotodoproduto: DataTypes.STRING,
-    quantidade: DataTypes.INTEGER,
-    descricaoproduto: DataTypes.STRING,
-    marca: DataTypes.STRING,
-    Fornecedor: DataTypes.STRING
+module.exports = (sequelize, DataType) => {
+  const Produto = sequelize.define('Produto', {
+    codigo: {
+      type: DataType.STRING,
+      allowNull: false
+    },
+    valor_unitario: {
+      type: DataType.DECIMAL(20, 2),
+      allowNull: false
+    },
+    foto: {
+      type: DataType.STRING,
+      allowNull: false
+    },
+    quantidade: {
+      type: DataType.INTEGER,
+      allowNull: false
+    },
+    descricao: {
+      type: DataType.STRING,
+      allowNull: false
+    },
+    marca: {
+      type: DataType.STRING,
+      allowNull: false
+    },
   }, {
-    tableName:'produto',
-    timestamps:false
-});
-  Product.associate = function(models) {
+    tableName: 'produto',
+    timestamps: true
+  });
+  Produto.associate = function (models) {
     // associations can be defined here
   };
-  return Product;
+  return Produto;
 };
