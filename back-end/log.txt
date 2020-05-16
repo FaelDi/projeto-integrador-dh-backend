@@ -1,2 +1,0 @@
- 
- O usuario entrou na url  /usuarios

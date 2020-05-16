@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var indexRouter = require('./routes');
 var usuariosRoutes = require('./routes/usuarios');
 var empresasRouter = require("./routes/empresas");
-var logMiddleware = require('../back-end/middlewares/logSite')
+var logMiddleware = require('./middlewares/logSite')
 
 var app = express();
 
