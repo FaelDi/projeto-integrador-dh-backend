@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      updatedAt: {
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false
       },
@@ -65,6 +65,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('avaliacao');
+    return queryInterface.dropTable('produto');
   }
 };

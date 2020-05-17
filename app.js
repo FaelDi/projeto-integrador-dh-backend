@@ -12,6 +12,15 @@ app.use(cors())
 var indexRouter = require('./routes');
 var usuariosRoutes = require('./routes/usuarios');
 var empresasRouter = require("./routes/empresas");
+
+var vendasRouter = require('./routes/vendas');
+var produtosRouter = require("./routes/produtos");
+var pagamentoRouter = require('./routes/pagamentos');
+var cotacoesRouter = require("./routes/cotacoes");
+var entregasRouter = require("./routes/entregas");
+var cotacoesProdutosRouter = require('./routes/cotacoesProdutos');
+var avaliacoesRouter = require('./routes/avaliacoes');
+
 var logMiddleware = require('./middlewares/logSite')
 
 // view engine setup
@@ -28,8 +37,13 @@ app.use(logMiddleware);
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRoutes);
 app.use('/empresas', empresasRouter);
-
-
+app.use('/vendas', vendasRouter);
+app.use('/produtos', produtosRouter);
+app.use('/pagamentos', pagamentoRouter);
+app.use('/cotacoes', cotacoesRouter);
+app.use('/entregas', entregasRouter);
+app.use('/cotacoesProdutos', cotacoesProdutosRouter);
+app.use('/avaliacoes', avaliacoesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
