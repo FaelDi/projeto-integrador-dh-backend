@@ -3,6 +3,7 @@ var router = express.Router();
 
 const UsuarioController = require("../controllers/UsuarioController");
 
+router.get('/login', UsuarioController.login);
 router.get('/', UsuarioController.index);
 router.get('/:id',UsuarioController.search);
 router.post("/cadastrar", UsuarioController.new);
