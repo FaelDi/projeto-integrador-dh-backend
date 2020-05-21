@@ -1,6 +1,30 @@
 const { Usuario, Pagamento, Empresa } = require("../models");
+const jwt = require('../config/jwt');
 
 module.exports = {
+	login: async (req, res) => {
+		const [, hash] = req.headers.authorization.split(' ')
+		const [email, senha] = Buffer.from(hash, 'base64')
+			.toString()
+			.split(':')
+		
+		try {
+			const user = await Usuario.findOne({ 	
+				where: { email, senha }
+			})
+	
+			if (!user) {
+				return res.send(401)
+			}
+	
+			const token = jwt.sign({ user: user.id })
+	
+			res.send({ user, token })
+		} catch (error) {
+			res.send(error)
+		}
+	},
+
 	index: async (req, res) => {
 		let users = await Usuario.findAll({
 			include: [
@@ -33,7 +57,10 @@ module.exports = {
 				where: { cpf: cpf },
 				defaults: { ...data }
 			})
-			return res.status(200).json(result);
+
+			const token = jwt.sign({ user: user.id })
+		
+			return res.status(200).json(result, token);
 
 		} catch{
 			return res.status(400).json({ err });
