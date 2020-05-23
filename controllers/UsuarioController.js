@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 // Função para validar CPF (fonte Receita Federal)
 function validarCPF(cpf) {
+	cpf = cpf.replace(/[^\d]+/g, ''); // Remove qualquer caracter nao numerico
 	if (cpf == '') return false; // Verifica se não esta vazio
 	// Elimina CPFs invalidos conhecidos	
 	if (cpf.length != 11 ||
@@ -36,22 +37,28 @@ function validarCPF(cpf) {
 
 module.exports = {
 	login: async (req, res) => {
-		const [, hash] = req.headers.authorization.split(' ')
-		const [email, senha] = Buffer.from(hash, 'base64')
-			.toString()
-			.split(':')
+		// const [, hash] = req.headers.authorization.split(' ');
+		// let [email, senha] = Buffer.from(hash, 'base64')
+		// 	.toString()
+		// 	.split(':')
+
+		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
+		// ------------------- APENAS PARA TESTE ----------------
+		let [cpf, senha] = req.headers.authorization.split(' ');
 
 		try {
+			// Busca o usuario no banco de dados pelo cpf
 			const user = await Usuario.findOne({
-				where: { email, senha }
-			})
+				where: { cpf }
+			});
 
-			if (!user) {
-				return res.send(401)
+			// Compara a senha com o hash gravado
+			if (!bcrypt.compareSync(senha, user.senha)) {
+				return res.send(401); // Retorna Forbidden se senha não confere
 			}
 
+			// Envia um json web token para autenticação do usuario
 			const token = jwt.sign({ user: user.id })
-
 			res.send({ user, token })
 		} catch (error) {
 			res.send(error)
@@ -87,8 +94,8 @@ module.exports = {
 		try {
 			const { cpf, ...data } = req.body;
 
-			// Hashes password to store in database
-			data.senha = bcrypt.hashSync(data.senha, 10);
+			// Hashes password to store in database uses senha length to generate salt
+			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
 
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
@@ -97,10 +104,14 @@ module.exports = {
 			};
 
 			// CPF Validation
-			cpf = cpf.replace(/[^\d]+/g, ''); // Remove qualquer carater nao numerico
 			if (!validarCPF(cpf)) {
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
 			};
+
+			// Name validation
+			if (!(data.nome) && data.nome.length > 2) {
+				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+			}
 
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
