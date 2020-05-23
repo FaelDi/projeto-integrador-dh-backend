@@ -32,14 +32,17 @@ module.exports = {
 		const { fk_usuario } = req.params;
 		const { cnpj } = req.body;
 
-		
+		let empresa = await buscaCnpj(cnpj);
+		if (empresa.status == "ERROR") {
+			res.status(400).json({ result: "Erro ao criar empresa", message: "O cnpj fornecido parece inválido. Verifique e tente novamente!" });
+		}
 
 		const {
 			qsa,
 			atividade_principal,
 			atividades_secundarias,
 			...dados
-		} = await buscaCnpj(cnpj);
+		} = empresa;
 		dados.atividade_principal = atividade_principal[0].text;
 		dados.atividades_secundarias = atividades_secundarias[0].text;
 		dados.qsa = qsa[0].nome;
@@ -69,7 +72,7 @@ module.exports = {
 			empresa.update(data);
 			return res.status(200).json(empresa);
 
-		} catch{
+		} catch (err) {
 			return res.status(400).json({ err });
 		}
 	},
@@ -81,7 +84,7 @@ module.exports = {
 			empresa.destroy();
 
 			return res.status(200).json(empresa);
-		} catch{
+		} catch (err) {
 			return res.status(400).json({ err });
 		}
 	},
