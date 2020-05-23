@@ -89,7 +89,7 @@ module.exports = {
 			const { cpf, ...data } = req.body;
 
 			// Hashes password to store in database
-			data.senha = bcrypt.hashSync(data.senha, 10);
+			data.senha = bcrypt.hashSync(data.senha, data.senha.length);
 
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
@@ -102,8 +102,6 @@ module.exports = {
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
-			console.log(data.nome)
-			console.log(!data.nome)
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
