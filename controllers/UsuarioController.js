@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 // Função para validar CPF (fonte Receita Federal)
 function validarCPF(cpf) {
+	cpf = cpf.replace(/[^\d]+/g, ''); // Remove qualquer caracter nao numerico
 	if (cpf == '') return false; // Verifica se não esta vazio
 	// Elimina CPFs invalidos conhecidos	
 	if (cpf.length != 11 ||
@@ -97,10 +98,14 @@ module.exports = {
 			};
 
 			// CPF Validation
-			cpf = cpf.replace(/[^\d]+/g, ''); // Remove qualquer carater nao numerico
 			if (!validarCPF(cpf)) {
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
 			};
+
+			// Name validation
+			if (!data.nome || data.nome.length > 2) {
+				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+			}
 
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({

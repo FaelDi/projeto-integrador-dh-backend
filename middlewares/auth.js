@@ -8,19 +8,19 @@ const authMiddleware = async (req, res, next) => {
     const payload = await jwt.verify(token);
     console.log(payload.user);
     
-    const user = await Usuario.findByPk(payload.user)
+    const user = await Usuario.findByPk(payload.user);
     console.log(user);
     
     if (!user) {
-      return res.send(401)
-    }
+      return res.send(401);
+    };
 
-    req.auth = user
+    req.auth = user;
 
-    next()
+    next();
   } catch (error) {
     res.status(401).send(error)
-  }
-}
+  };
+};
 
 module.exports = authMiddleware;
