@@ -10,9 +10,7 @@ const buscaCnpj = async (cnpj) => {
 module.exports = {
 	index: async (req, res) => {
 		let empresas = await Empresa.findAll({
-			model: Atividade,
-			as: 'atividade',
-			through: { attributes: [] }
+			include: 'atividade'
 		})
 		if (empresas !== null) {
 			res.send(empresas);
