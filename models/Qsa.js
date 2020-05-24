@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataType) => {
-    const Qsa = sequelize.define("qsa", {
+    const Qsa = sequelize.define("Qsa", {
         qual: {
             type: DataType.STRING,
             allowNull: false
@@ -13,8 +13,17 @@ module.exports = (sequelize, DataType) => {
         timestamps: true
     });
 
-    // Qsa.associate = function(models) {
-    //     Qsa.belongsToMany(models.Group, { through: models.GroupPermission, foreignKey: 'permissionId', otherKey: 'groupId' });
-    //   };
+    Qsa.associate = (models) => {
+        //Pertence a um usuário
+        Qsa.belongsTo(models.Empresa, {
+            foreignKey: 'fk_qsa',
+            as: 'empresa'
+        });
+        //Pertence a um usuário
+        Qsa.belongsTo(models.Usuario, {
+            foreignKey: 'fk_empresa',
+            as: 'usuario'
+        });
+    }
     return Qsa;
 }
