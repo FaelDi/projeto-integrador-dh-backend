@@ -12,6 +12,7 @@ app.use(cors())
 var indexRouter = require('./routes');
 var usuariosRoutes = require('./routes/usuarios');
 var empresasRouter = require("./routes/empresas");
+var atividadesRouter = require("./routes/atividades");
 
 var vendasRouter = require('./routes/vendas');
 var produtosRouter = require("./routes/produtos");
@@ -37,6 +38,7 @@ app.use(logMiddleware);
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRoutes);
 app.use('/empresas', empresasRouter);
+app.use('/atividades', atividadesRouter);
 app.use('/vendas', vendasRouter);
 app.use('/produtos', produtosRouter);
 app.use('/pagamentos', pagamentoRouter);
