@@ -138,6 +138,23 @@ module.exports = {
 			const { id } = req.params;
 			const { ...data } = req.body;
 			const user = await Usuario.findByPk(id);
+
+			// Hashes password to store in database uses senha length to generate salt
+			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
+
+			// Email validation
+			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+			if (!data.email && !data.email.match(regexEmail)) {
+				// Verifica se email null e se o formato é valido
+				return res.status(400).json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+			};
+
+			// Name validation
+			if (!(data.nome) && data.nome.length < 3) {
+				// Valida se nome é null
+				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+			}
+
 			user.update(data);
 			return res.status(200).json(user);
 
