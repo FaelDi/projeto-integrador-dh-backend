@@ -14,7 +14,16 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true
     });
     Avaliacao.associate = function (models) {
-        // associations can be defined here
+
+        Avaliacao.belongsTo(models.Empresa, {
+            foreignKey: 'fk_empresa',
+            as: 'empresa'
+        });
+        
+        Avaliacao.belongsTo(models.Usuario, {
+            foreignKey: 'fk_usuario',
+            as: 'usuario'
+        });
     };
     return Avaliacao;
 };
