@@ -6,8 +6,8 @@ const AvaliacaoController = require("../controllers/AvaliacaoController");
 
 router.get('/', AvaliacaoController.index);
 router.get('/:id',AvaliacaoController.search);
-// router.post("/cadastrar/:fk_empresa/", AvaliacaoController.new);
-// router.put('/:id',AvaliacaoController.update);
+router.post("/cadastrar", AvaliacaoController.new);
+router.put('/:id',AvaliacaoController.update);
 router.delete('/:id',AvaliacaoController.delete);
 
 module.exports = router;
