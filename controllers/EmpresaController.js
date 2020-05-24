@@ -1,4 +1,4 @@
-const { Empresa, Usuario } = require("../models");
+const { Empresa, Atividade,  Usuario } = require("../models");
 const fetch = require("node-fetch");
 
 const buscaCnpj = async (cnpj) => {
@@ -9,7 +9,11 @@ const buscaCnpj = async (cnpj) => {
 
 module.exports = {
 	index: async (req, res) => {
-		let empresas = await Empresa.findAll();
+		let empresas = await Empresa.findAll({
+			model: Atividade,
+			as: 'atividade',
+			through: { attributes: [] }
+		})
 		if (empresas !== null) {
 			res.send(empresas);
 		} else {
@@ -41,8 +45,15 @@ module.exports = {
 			qsa,
 			atividade_principal,
 			atividades_secundarias,
+			teste,
 			...dados
 		} = company;
+
+		const atividades = [...atividade_principal, ...atividades_secundarias];
+
+		// console.log(atividades);
+		// atividades.map(e => console.log(e));
+
 		dados.atividade_principal = atividade_principal[0].text;
 		dados.atividades_secundarias = atividades_secundarias[0].text;
 		dados.qsa = qsa[0].nome;
@@ -54,8 +65,27 @@ module.exports = {
 			return res.status(400).json({ error: 'Usuario não encontrado!' });
 		}
 
-		const empresa = await Empresa.create(dados);
+		//const empresa = await Empresa.create(dados);
 
+		const [empresa] = await Empresa.findOrCreate({
+			where: { cnpj: cnpj },
+			defaults: { ...dados }
+		});
+		
+		if (atividades) {
+			// empresa.setAtividade(teste);
+			async function createAtividades(e) {
+				const [result] = await Atividade.findOrCreate({
+					where: { code: e.code },
+					defaults: { text: e.text }
+				});
+				
+				//empresa.setAtividade(result);
+				empresa.setAtividade(result);
+			}
+			atividades.map(e => createAtividades(e));
+		}
+				
 		return res.status(200).json(empresa);
 	},
 

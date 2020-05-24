@@ -123,12 +123,18 @@ module.exports = (sequelize, DataType) => {
             foreignKey: 'fk_usuario',
             as: 'usuario'
         });
+
+        Empresa.belongsToMany(models.Atividade, {
+            through: 'empresa_tem_atividade',
+            foreignKey: 'fk_empresa',
+            as: 'atividade'
+        });
         // //Possui uma ou mais atividades principais
         // Empresa.hasMany(models.Atividade_principal, {
         //     foreignKey: 'fk_empresa',
         //     as: 'atividade_principal'
         // });
-      
+
         // //Possui uma ou mais atividades secundarias
         // Empresa.hasMany(models.Atividades_secundarias, {
         //     foreignKey: 'fk_empresa',
