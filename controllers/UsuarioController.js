@@ -120,10 +120,9 @@ module.exports = {
 			});
 
 			// Gera um token para mandar no response e autenticar usuario
-			const token = jwt.sign({ user: result.dataValues.id });
+			// const token = jwt.sign({ user: result.dataValues.id });
 
-			// res.send(cpf, data);
-			return res.status(201).json({ result: result.dataValues, token: token });
+			return res.status(200).json({ result: result });
 
 		} catch (err) {
 			return res.status(200).json({
@@ -138,6 +137,11 @@ module.exports = {
 			const { id } = req.params;
 			const { ...data } = req.body;
 			const user = await Usuario.findByPk(id);
+
+			// Compara a senha antiga com o hash gravado
+			if (!bcrypt.compareSync(data.senha0, user.senha)) {
+				throw new Error("Senha inválida") // Retorna Forbidden se senha não confere
+			}
 
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
@@ -155,11 +159,15 @@ module.exports = {
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
 			}
 
+			// Faz update com os novos dados passados para o user
 			user.update(data);
 			return res.status(200).json(user);
 
-		} catch{
-			return res.status(400).json({ err });
+		} catch (err) {
+			return res.status(401).json({
+				result: "Erro ao alterar usuário",
+				message: err.message
+			});
 		}
 	},
 
