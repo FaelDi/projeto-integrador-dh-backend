@@ -2,45 +2,45 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('cotacao_tem_produto', {
+    return queryInterface.createTable('empresa_tem_atividade', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
+      fk_empresa: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'empresa',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false
+      },
+      fk_atividade: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'atividade',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false
+      },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
-      fk_usuario: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'produto',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false
-      },
-      fk_cotacao: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'cotacao',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false
-      }
     });
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('cotacao_tem_produto');
+      return queryInterface.dropTable('empresa_tem_atividade');
   }
 };

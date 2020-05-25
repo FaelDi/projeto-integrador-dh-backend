@@ -5,6 +5,9 @@ const EmpresaController = require("../controllers/EmpresaController");
 
 
 router.get('/', EmpresaController.index);
-router.post("/:id_usuario",EmpresaController.store);
+router.get('/:id',EmpresaController.search);
+router.post("/cadastrar/:fk_usuario/", EmpresaController.new);
+router.put('/:id',EmpresaController.update);
+router.delete('/:id',EmpresaController.delete);
 
 module.exports = router;

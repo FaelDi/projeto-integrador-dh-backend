@@ -117,8 +117,36 @@ module.exports = (sequelize, DataType) => {
         timestamps: true
     });
 
-    // Permission.associate = function(models) {
-    //     Permission.belongsToMany(models.Group, { through: models.GroupPermission, foreignKey: 'permissionId', otherKey: 'groupId' });
-    //   };
+    Empresa.associate = (models) => {
+        //Pertence a um usuário
+        Empresa.belongsTo(models.Usuario, {
+            foreignKey: 'fk_usuario',
+            as: 'usuario'
+        });
+
+        Empresa.belongsToMany(models.Atividade, {
+            through: 'empresa_tem_atividade',
+            foreignKey: 'fk_empresa',
+            as: 'atividade'
+        });
+        // //Possui uma ou mais atividades principais
+        // Empresa.hasMany(models.Atividade_principal, {
+        //     foreignKey: 'fk_empresa',
+        //     as: 'atividade_principal'
+        // });
+
+        // //Possui uma ou mais atividades secundarias
+        // Empresa.hasMany(models.Atividades_secundarias, {
+        //     foreignKey: 'fk_empresa',
+        //     as: 'atividades_secundarias'
+        // });
+
+        // //Possui uma ou mais qsas
+        // Empresa.hasMany(models.Qsa, {
+        //     foreignKey: 'fk_empresa',
+        //     as: 'qsa'
+        // });
+    }
+
     return Empresa;
 }

@@ -126,6 +126,13 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false
       },
+      fk_atividades: {
+        type: Sequelize.INTEGER,
+        references: { model: 'atividades', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false
