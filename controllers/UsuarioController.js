@@ -125,7 +125,7 @@ module.exports = {
 			return res.status(200).json({ result: result });
 
 		} catch (err) {
-			return res.status(200).json({
+			return res.status(400).json({
 				result: "Erro ao criar usuário",
 				message: err.message
 			});
@@ -182,6 +182,5 @@ module.exports = {
 			return res.status(400).json({ err });
 		}
 	},
-
 }
 
