@@ -1,4 +1,4 @@
-const { Atividade,  Usuario, Avaliacao, Empresa } = require("../models");
+const { Atividade, Usuario, Avaliacao, Empresa } = require("../models");
 
 module.exports = {
 	index: async (req, res) => {
@@ -22,7 +22,7 @@ module.exports = {
 	new: async (req, res) => {
 
 		const { ...data } = req.body;
-		
+
 		let avaliacoes = await Avaliacao.create(data)
 
 		if (avaliacoes !== null) {

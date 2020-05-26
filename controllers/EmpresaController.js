@@ -10,28 +10,29 @@ const buscaCnpj = async (cnpj) => {
 }
 
 module.exports = {
+	// Busca todas as empresas cadastradas
 	index: async (req, res) => {
 		let empresas = await Empresa.findAll({
 			include: 'atividade'
 		})
-		if (empresas !== null) {
+		if (empresas) {
 			res.send(empresas);
 		} else {
 			res.send("Nao há empresas cadastradas");
-		}
+		};
 	},
-
+	// Busca empresa pelo id
 	search: async (req, res) => {
 		let id = req.params.id
 
 		let empresa = await Empresa.findByPk(id);
-		if (empresa !== null) {
+		if (empresa) {
 			return res.status(200).json(empresa);
 		} else {
 			return res.status(400).json({ err: 'Empresa  não foi encontrada!' });
-		}
+		};
 	},
-
+	// Cria nova empresa relacionada ao usuario
 	new: async (req, res) => {
 		const { fk_usuario } = req.params;
 		const { cnpj } = req.body;
@@ -39,9 +40,11 @@ module.exports = {
 		try {
 			// Consulta o cnpj no site da receita e retorna os dados em json
 			let company = await buscaCnpj(cnpj);
+
+			// Verifica se houve um erro durante a consulta
 			if (company.status == "ERROR") {
 				res.status(400).json({ result: "Erro ao criar empresa", message: "O cnpj fornecido parece inválido. Verifique e tente novamente!" });
-			}
+			};
 
 			const {
 				qsa,
@@ -84,20 +87,19 @@ module.exports = {
 
 					//empresa.setAtividade(result);
 					empresa.setAtividade(result);
-				}
+				};
 				atividades.map(e => createAtividades(e));
-			}
+			};
 
 			return res.status(200).json(empresa);
 		} catch (err) {
-			return res.status(200).json({
+			return res.status(400).json({
 				result: "Erro ao criar empresa",
 				message: err.message
 			});
-		}
-
+		};
 	},
-
+	// Atualiza informações da empresa
 	update: async (req, res) => {
 		try {
 			const { id } = req.params;
@@ -112,10 +114,13 @@ module.exports = {
 			return res.status(200).json(empresa);
 
 		} catch (err) {
-			return res.status(400).json({ err });
-		}
+			return res.status(400).json({
+				result: "Erro ao criar empresa",
+				message: err.message
+			});
+		};
 	},
-
+	// Deleta uma empresa pelo id dela no banco
 	delete: async (req, res) => {
 		try {
 			const { id } = req.params;
@@ -124,8 +129,11 @@ module.exports = {
 
 			return res.status(200).json(empresa);
 		} catch (err) {
-			return res.status(400).json({ err });
-		}
+			return res.status(400).json({
+				result: "Erro ao criar empresa",
+				message: err.message
+			});
+		};
 	},
 }
 
