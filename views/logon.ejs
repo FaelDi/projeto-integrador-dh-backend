@@ -1,22 +1,42 @@
-<%- include('parts/head', {title:'Titulo da Home', page: 'logon'}); %>
+<%- include('parts/head', {title:'Entrar', page: 'Entrar'}); %>
 
 <div class="main_container">
 
-  <h1><%= msg %></h1>
+  <h1 style="text-align: center;"><%= msg %></h1>
 
   <section class="home-bg">
     <div class="home">
-      <div class="home-info">
-        <h1>Home</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dolores sit quis voluptatibus aut dolorem ea
-          nemo! Doloremque itaque numquam, vel porro unde dolor? Aut aspernatur accusantium dolor eveniet tenetur!</p>
+      <!-- <div class="main_container"> -->
+      <!-- <section class="logon-bg"> -->
+      <div class="bloco">
+        <div class="logon-info">
+          <h1>Login</h1>
+          <p>Entre com seu e-mail e senha e seja feliz!</p>
+          <a class="back-link" href="/register">
+            <!-- <Link class="back-link" to="/register"> -->
+            <!-- <FiArrowLeft size={16} color="#07beb8" /> -->
+            Não tenho Login!?
+            <!-- </Link> -->
+          </a>
+        </div>
 
+        <div class="logon-form">
+          <form>
+
+            <input type="cpf" placeholder="Digite seu melhor e-mail" />
+
+            <input type="password" placeholder="Digite sua senha" />
+
+
+            <!-- <Link class='back-link' to='/dashboard/'> -->
+            <button class="button" type="submit">Enviar</button>
+            <!-- </Link> -->
+
+          </form>
+        </div>
       </div>
-
-      <div class="home-img">
-        <img src=img/home.svg alt="home-site" />
-      </div>
-
+      <!-- </section> -->
+      <!-- </div> -->
     </div>
   </section>
 
