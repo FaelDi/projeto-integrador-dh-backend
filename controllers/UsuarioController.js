@@ -45,10 +45,10 @@ module.exports = {
 		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
 		// ------------------- APENAS PARA TESTE ----------------
 		// let [cpf, senha] = req.headers.authorization.split(' ');
+
+		// Recebe o email e senha do usuario do form
 		const { email, senha } = req.body;
 
-		console.log(email);
-		console.log(senha);
 		try {
 			// Busca o usuario no banco de dados pelo cpf
 			const user = await Usuario.findOne({
@@ -62,6 +62,8 @@ module.exports = {
 
 			// Envia um json web token para autenticação do usuario
 			const token = jwt.sign({ user: user.id })
+
+			// TODO: renderizar a view de usuario logado ou index.ejs
 			res.send({ user, token })
 		} catch (error) {
 			res.send(error)
