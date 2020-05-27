@@ -44,18 +44,21 @@ module.exports = {
 
 		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
 		// ------------------- APENAS PARA TESTE ----------------
-		let [cpf, senha] = req.headers.authorization.split(' ');
+		// let [cpf, senha] = req.headers.authorization.split(' ');
+		const { email, senha } = req.body;
 
+		console.log(email);
+		console.log(senha);
 		try {
 			// Busca o usuario no banco de dados pelo cpf
 			const user = await Usuario.findOne({
-				where: { cpf }
+				where: { email }
 			});
 
 			// Compara a senha com o hash gravado
 			if (!bcrypt.compareSync(senha, user.senha)) {
 				return res.send(401); // Retorna Forbidden se senha não confere
-			}
+			};
 
 			// Envia um json web token para autenticação do usuario
 			const token = jwt.sign({ user: user.id })
