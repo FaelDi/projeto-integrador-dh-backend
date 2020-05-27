@@ -116,6 +116,7 @@ module.exports = {
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
 				where: { cpf: cpf },
+				where: { email: data.email },
 				defaults: { ...data }
 			});
 
