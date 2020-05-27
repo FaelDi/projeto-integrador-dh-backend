@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(logMiddleware);
 
 app.use('/', indexRouter);
+// app.use('/#', indexRouter);
 app.use('/usuarios', usuariosRoutes);
 app.use('/empresas', empresasRouter);
 app.use('/atividades', atividadesRouter);

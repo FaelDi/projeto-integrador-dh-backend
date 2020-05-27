@@ -11,6 +11,10 @@ router.get('/', (req, res) => {
   res.render('index', { msg: 'teste' });
 });
 
+router.get('/logon', (req, res) => {
+  res.render('logon', { msg: 'logon' });
+});
+
 router.get('/me', authMiddleware, (req, res) => {
   res.send(req.auth);
 });
