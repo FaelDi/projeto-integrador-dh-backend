@@ -41,7 +41,6 @@ module.exports = {
 		// let [email, senha] = Buffer.from(hash, 'base64')
 		// 	.toString()
 		// 	.split(':')
-
 		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
 		// ------------------- APENAS PARA TESTE ----------------
 		// let [cpf, senha] = req.headers.authorization.split(' ');
