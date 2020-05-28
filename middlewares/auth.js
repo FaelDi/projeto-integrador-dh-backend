@@ -2,9 +2,9 @@ const { Usuario, Pagamento, Empresa } = require("../models");
 const jwt = require('../config/jwt');
 
 const authMiddleware = async (req, res, next) => {
-  const [, token] = req.headers.authorization.split(' ')
-  console.log(req.headers.authorization)
   try {
+    const [token] = req.headers.authorization
+  console.log(req.headers.authorization)
     const payload = await jwt.verify(token);
     console.log(payload.user);
     
@@ -19,7 +19,8 @@ const authMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(401).send(error)
+    console.log(error)
+    res.sendStatus(401);
   };
 };
 
