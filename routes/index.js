@@ -19,7 +19,7 @@ router.get('/register', (req, res) => {
   res.render('register', { msg: 'Cadastre-se' });
 });
 
-router.get('/me', authMiddleware, (req, res) => {
+router.get('/me', /*authMiddleware,*/ (req, res) => {
   res.send(req.auth);
 });
 

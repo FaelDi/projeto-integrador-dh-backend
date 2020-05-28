@@ -4,9 +4,9 @@ var router = express.Router();
 
 const CotacaoController = require("../controllers/CotacaoController");
 
-router.get('/', CotacaoController.index);
-//router.post("/cadastrar", CotacaoController.new);
-router.delete('/delete/:id',CotacaoController.delete);
-router.get('/busca/:id',CotacaoController.search);
+router.get('/', /*authMiddleware,*/ CotacaoController.index);
+//router.post("/cadastrar", /*authMiddleware,*/ CotacaoController.new);
+router.delete('/delete/:id', /*authMiddleware,*/ CotacaoController.delete);
+router.get('/busca/:id', /*authMiddleware,*/ CotacaoController.search);
 
 module.exports = router;
