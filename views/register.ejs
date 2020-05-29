@@ -1,35 +1,32 @@
-<%- include('parts/head', {title:'Entrar', page: 'Entrar'}); %>
+<%- include('parts/head', {title:'Registrar', page: 'register'}); %>
 
 <div class="main_container">
 
-    <h1 style="text-align: center;"><%= msg %></h1>
-    <section class="register-bg">
-        <div class="register-info">
-            <h1>Cadastro</h1>
-            <p>Faça seu cadastro, entre na plataforma e envie ou receba orçamentos...</p>
-            <a href="/logon" class="back-link">
-                <!-- <Link class="back-link" to="/logon"> -->
-                <!-- <FiArrowLeft size={16} color="#07beb8" /> -->
-                Já tenho Login!
-                <!-- </Link> -->
-            </a>
-        </div>
+  <h1 style="text-align: center;"><%= msg %></h1>
+  <section class="bloco">
+    <div class="register-info">
+      <h1>Cadastro</h1>
+      <p>Faça seu cadastro, entre na plataforma e envie ou receba orçamentos...</p>
+      <a href="/logon" class="back-link">
+        Já tenho Login!
+      </a>
+    </div>
 
-        <div class="register-form">
-            <form action="/usuarios/cadastrar" method="POST">
-                <input placeholder="Digite seu nome" />
+    <div class="register-form">
+      <form action="/usuarios/cadastrar" method="POST">
+        <input placeholder="Digite seu nome" />
 
-                <input type="email" placeholder="Digite seu melhor e-mail" />
+        <input type="email" placeholder="Digite seu melhor e-mail" />
 
-                <input placeholder="Digite seu CPF" />
+        <input placeholder="Digite seu CPF" />
 
-                <input type="senha" placeholder="Digite uma senha" />
+        <input type="senha" placeholder="Digite uma senha" />
 
-                <button class="button" type="submit">Cadastrar</button>
+        <button class="button" type="submit">Cadastrar</button>
 
-            </form>
-        </div>
-    </section>
+      </form>
+    </div>
+  </section>
 </div>
 
 <%- include('parts/foot'); %>
