@@ -169,7 +169,7 @@ form textarea {
 
 .navbar {
   position: fixed;
-  background-color: var(--cinza);
+  background-color: var(--azul-escuro);
   transition: width 600ms ease;
 }
 
@@ -291,7 +291,7 @@ form textarea {
 @media only screen and (min-width: 600px) {
   .navbar {
     top: 0;
-    width: 6rem;
+    width: 8rem;
     height: 100vh;
   }
 
