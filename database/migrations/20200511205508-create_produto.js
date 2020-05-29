@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       valor_unitario: {
         type: Sequelize.FLOAT(20,2),
         allowNull: false
