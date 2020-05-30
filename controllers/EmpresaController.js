@@ -16,7 +16,8 @@ module.exports = {
 			include: 'atividade'
 		})
 		if (empresas) {
-			res.send(empresas);
+			// res.send(empresas);
+			res.render('empresas', { data: empresas });
 		} else {
 			res.send("Nao há empresas cadastradas");
 		};
