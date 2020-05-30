@@ -13,7 +13,6 @@ var indexRouter = require('./routes');
 var usuariosRoutes = require('./routes/usuarios');
 var empresasRouter = require("./routes/empresas");
 var atividadesRouter = require("./routes/atividades");
-
 var vendasRouter = require('./routes/vendas');
 var produtosRouter = require("./routes/produtos");
 var pagamentoRouter = require('./routes/pagamentos');
