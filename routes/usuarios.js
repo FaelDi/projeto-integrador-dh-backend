@@ -3,7 +3,7 @@ var router = express.Router();
 const authMiddleware = require("../middlewares/auth");
 const UsuarioController = require("../controllers/UsuarioController");
 
-router.post("/cadastrar", authMiddleware, UsuarioController.new);
+router.post("/cadastrar", UsuarioController.new);  // Não necessita da middleware Auth
 router.post("/login", UsuarioController.login);  // Não necessita da middleware Auth
 router.get('/', authMiddleware, UsuarioController.index);
 router.get('/:id', authMiddleware, UsuarioController.search);

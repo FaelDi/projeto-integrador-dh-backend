@@ -20,12 +20,20 @@
         </div>
 
         <div class="logon-form">
-          <form action="/usuarios/login" method="POST">
+          <form action="/usuarios/login" method="POST" class="col s12">
 
-            <input type="email" name="email" id="email" placeholder="Digite seu melhor e-mail" />
+            <div class="input-field col s6">
+              <input id="email" type="email" name="email" class="validate">
+              <label for="email" style="left: 0;">Digite seu melhor e-mail</label>
+            </div>
+            <!-- <input type="email" name="email" id="email" placeholder="Digite seu melhor e-mail" /> -->
 
-            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" />
+            <div class="input-field col s6" style="top: 10px;">
+              <input id="senha" type="password" name="senha" class="validate">
+              <label for="email" style="left: 0;">Digite sua senha</label>
+            </div>
 
+            <!-- <input type="password" name="senha" id="senha" placeholder="Digite sua senha" /> -->
 
             <!-- <Link class='back-link' to='/dashboard/'> -->
             <button class="button" type="submit">Enviar</button>
