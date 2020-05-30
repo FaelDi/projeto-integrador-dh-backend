@@ -62,11 +62,12 @@ module.exports = {
 			// Envia um json web token para autenticação do usuario
 			const token = jwt.sign({ user: user.id })
 
-			// TODO: renderizar a view de usuario logado ou index.ejs
-			res.send({ user, token })
-		} catch (error) {
-			res.send(error)
-		}
+			// Renderiza a view de usuario logado
+			res.render("dash-index", { user, token });
+			// res.send({ user, token });
+		} catch (err) {
+			res.send({ erro: err })
+		};
 	},
 
 	index: async (req, res) => {
