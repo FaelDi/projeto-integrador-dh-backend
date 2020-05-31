@@ -1,4 +1,4 @@
-<%- include('parts/dash-head', {title:'Orca', page: 'home', id: user.id}); %>
+<%- include('parts/dash-head', {title:'Orca', page: 'home', id: user.id, nome: user.nome.split(' ')[0] }); %>
 
 <div class="main_container">
 
@@ -17,5 +17,12 @@
   </section>
 
 </div>
+
+<input type="hidden" name="token" value="<%- token %>">
+
+<script>
+  let token = document.getElementsByName("token")[0].value
+  sessionStorage.setItem("token", token);
+</script>
 
 <%- include('parts/foot'); %>
