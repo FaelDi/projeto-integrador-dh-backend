@@ -46,12 +46,15 @@ function validarCPF(cpf) {
 module.exports = {
 	cep: async (req,res) =>  {
 		try {
-			const adress = await buscaCnpj(req.params.cep);
+			if (req.params.cep.length == 8) {
+			const adress = await buscaCnpj();
 			if (adress.status == "ERROR") {
 				res.status(400).json({ result: "Erro ao consultar cep!!" });
 			};
-
 			return res.status(200).json(adress);
+			}else{
+				res.status(400).json({ result: "Cep inválido!" });
+			}
 		} catch (err) {
 			return res.status(400).json({
 				result: "Erro ao consultar cep",
