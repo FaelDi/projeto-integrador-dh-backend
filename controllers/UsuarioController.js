@@ -1,6 +1,14 @@
 const { Usuario, Pagamento, Empresa } = require("../models");
 const jwt = require('../config/jwt');
 const bcrypt = require("bcrypt");
+const fetch = require("node-fetch");
+
+
+const buscaCnpj = async (cep) => {
+	let res = await fetch(`https://viacep.com.br/ws/`+cep+`/json/`)
+	const data = await res.json();
+	return data;
+}
 
 // Função para validar CPF (fonte Receita Federal)
 function validarCPF(cpf) {
@@ -36,6 +44,22 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
+	cep: async (req,res) =>  {
+		try {
+			const adress = await buscaCnpj(req.params.cep);
+			if (adress.status == "ERROR") {
+				res.status(400).json({ result: "Erro ao consultar cep!!" });
+			};
+
+			return res.status(200).json(adress);
+		} catch (err) {
+			return res.status(400).json({
+				result: "Erro ao consultar cep",
+				message: err.message
+			});
+		};
+		
+	},
 	login: async (req, res) => {
 		// const [, hash] = req.headers.authorization.split(' ');
 		// let [email, senha] = Buffer.from(hash, 'base64')
