@@ -1,0 +1,144 @@
+
+{
+    "atividade_principal": [
+      {
+        "text": "Comércio varejista de artigos do vestuário e acessórios",
+        "code": "47.81-4-00"
+      }
+    ],
+    "data_situacao": "03/11/2005",
+    "complemento": "432",
+    "nome": "MARISA LOJAS S.A.",
+    "uf": "SP",
+    "telefone": "(011) 3660-6045",
+    "email": "opublico@marisa.com.br",
+    "atividades_secundarias": [
+      {
+        "text": "Correspondentes de instituições financeiras",
+        "code": "66.19-3-02"
+      },
+      {
+        "text": "Outras atividades auxiliares dos serviços financeiros não especificadas anteriormente",
+        "code": "66.19-3-99"
+      },
+      {
+        "text": "Comércio varejista de tecidos",
+        "code": "47.55-5-01"
+      },
+      {
+        "text": "Comercio varejista de artigos de armarinho",
+        "code": "47.55-5-02"
+      },
+      {
+        "text": "Comercio varejista de artigos de cama, mesa e banho",
+        "code": "47.55-5-03"
+      },
+      {
+        "text": "Comércio varejista de livros",
+        "code": "47.61-0-01"
+      },
+      {
+        "text": "Comércio varejista de jornais e revistas",
+        "code": "47.61-0-02"
+      },
+      {
+        "text": "Comércio varejista de artigos de papelaria",
+        "code": "47.61-0-03"
+      },
+      {
+        "text": "Comércio varejista de discos, CDs, DVDs e fitas",
+        "code": "47.62-8-00"
+      },
+      {
+        "text": "Comércio varejista de brinquedos e artigos recreativos",
+        "code": "47.63-6-01"
+      },
+      {
+        "text": "Comércio varejista de cosméticos, produtos de perfumaria e de higiene pessoal",
+        "code": "47.72-5-00"
+      },
+      {
+        "text": "Comércio varejista de calçados",
+        "code": "47.82-2-01"
+      },
+      {
+        "text": "Comércio varejista de artigos de viagem",
+        "code": "47.82-2-02"
+      },
+      {
+        "text": "Comércio varejista de suvenires, bijuterias e artesanatos",
+        "code": "47.89-0-01"
+      },
+      {
+        "text": "Comércio varejista de artigos fotográficos e para filmagem",
+        "code": "47.89-0-08"
+      },
+      {
+        "text": "Comércio varejista de outros produtos não especificados anteriormente",
+        "code": "47.89-0-99"
+      },
+      {
+        "text": "Atividades de intermediação e agenciamento de serviços e negócios em geral, exceto imobiliários",
+        "code": "74.90-1-04"
+      },
+      {
+        "text": "Atividades auxiliares dos seguros, da previdência complementar e dos planos de saúde não especificadas anteriormente",
+        "code": "66.29-1-00"
+      },
+      {
+        "text": "Portais, provedores de conteúdo e outros serviços de informação na internet",
+        "code": "63.19-4-00"
+      },
+      {
+        "text": "Comércio atacadista de artigos do vestuário e acessórios, exceto profissionais e de segurança",
+        "code": "46.42-7-01"
+      }
+    ],
+    "qsa": [
+      {
+        "qual": "10-Diretor",
+        "nome": "ADALBERTO PEREIRA DOS SANTOS"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "MARCELO RIBEIRO PIMENTEL"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "MARCO LUIZ CLASEN MURARO"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "ALBERTO KOHN DE PENHAS"
+      }
+    ],
+    "situacao": "ATIVA",
+    "bairro": "BARRA FUNDA",
+    "logradouro": "R JAMES HOLLAND",
+    "numero": "422",
+    "cep": "01.138-000",
+    "municipio": "SAO PAULO",
+    "porte": "DEMAIS",
+    "abertura": "25/08/1966",
+    "natureza_juridica": "204-6 - Sociedade Anônima Aberta",
+    "fantasia": "LOJAS MARISA",
+    "cnpj": "61.189.288/0001-89",
+    "ultima_atualizacao": "2020-05-15T10:42:05.935Z",
+    "status": "OK",
+    "tipo": "MATRIZ",
+    "efr": "",
+    "motivo_situacao": "",
+    "situacao_especial": "",
+    "data_situacao_especial": "",
+    "capital_social": "1467305195.00",
+    "extra": {
+      
+    },
+    "billing": {
+      "free": true,
+      "database": true
+    }
+  }
+
+
+  
