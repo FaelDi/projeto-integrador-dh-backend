@@ -1,0 +1,49 @@
+{
+    "atividade_principal": [
+      {
+        "text": "Comércio atacadista de artigos de escritório e de papelaria",
+        "code": "46.47-8-01"
+      }
+    ],
+    "data_situacao": "03/11/2005",
+    "complemento": "1, 2, 3 - ANDARES",
+    "nome": "KALUNGA COMERCIO E INDUSTRIA GRAFICA LTDA",
+    "uf": "SP",
+    "telefone": "(011) 4339-6455",
+    "situacao": "ATIVA",
+    "bairro": "MOOCA",
+    "logradouro": "R DA MOOCA",
+    "numero": "766",
+    "cep": "03.104-000",
+    "municipio": "SAO PAULO",
+    "porte": "DEMAIS",
+    "abertura": "04/10/2000",
+    "natureza_juridica": "206-2 - Sociedade Empresária Limitada",
+    "cnpj": "43.283.811/0023-65",
+    "ultima_atualizacao": "2020-06-02T10:48:06.242Z",
+    "status": "OK",
+    "tipo": "FILIAL",
+    "fantasia": "",
+    "email": "",
+    "efr": "",
+    "motivo_situacao": "",
+    "situacao_especial": "",
+    "data_situacao_especial": "",
+    "atividades_secundarias": [
+      {
+        "code": "00.00-0-00",
+        "text": "Não informada"
+      }
+    ],
+    "capital_social": "0.00",
+    "qsa": [
+      
+    ],
+    "extra": {
+      
+    },
+    "billing": {
+      "free": true,
+      "database": true
+    }
+  }

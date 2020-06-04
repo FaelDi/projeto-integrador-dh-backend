@@ -1,0 +1,128 @@
+{
+    "atividade_principal": [
+      {
+        "text": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - supermercados",
+        "code": "47.11-3-02"
+      }
+    ],
+    "data_situacao": "03/11/2005",
+    "nome": "LOJAS AMERICANAS S.A.",
+    "uf": "RJ",
+    "telefone": "(21) 2206-6708",
+    "email": "sede@lasa.com.br",
+    "atividades_secundarias": [
+      {
+        "text": "Lojas de departamentos ou magazines, exceto lojas francas (Duty free)",
+        "code": "47.13-0-04"
+      },
+      {
+        "text": "Comércio varejista de doces, balas, bombons e semelhantes",
+        "code": "47.21-1-04"
+      },
+      {
+        "text": "Comércio varejista especializado de equipamentos de telefonia e comunicação",
+        "code": "47.52-1-00"
+      },
+      {
+        "text": "Comércio varejista de cosméticos, produtos de perfumaria e de higiene pessoal",
+        "code": "47.72-5-00"
+      },
+      {
+        "text": "Comércio varejista de produtos saneantes domissanitários",
+        "code": "47.89-0-05"
+      },
+      {
+        "text": "Lanchonetes, casas de chá, de sucos e similares",
+        "code": "56.11-2-03"
+      },
+      {
+        "text": "Outras atividades de telecomunicações não especificadas anteriormente",
+        "code": "61.90-6-99"
+      },
+      {
+        "text": "Correspondentes de instituições financeiras",
+        "code": "66.19-3-02"
+      },
+      {
+        "text": "Atividades de intermediação e agenciamento de serviços e negócios em geral, exceto imobiliários",
+        "code": "74.90-1-04"
+      }
+    ],
+    "qsa": [
+      {
+        "qual": "16-Presidente",
+        "nome": "MIGUEL GOMES PEREIRA SARMIENTO GUTIERREZ"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "ANNA CHRISTINA RAMOS SAICALI"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "CELSO ALVES FERREIRA LOURO"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "MARCIO CRUZ MEIRELLES"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "JOSE TIMOTHEO DE BARROS"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "MARIA CHRISTINA FERREIRA NASCIMENTO"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "CARLOS EDUARDO ROSALBA PADILHA"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "JOAO GUERRA DUARTE NETO"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "WELINGTON DE ALMEIDA SOUZA"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "MILENA DE ANDRADE SACRAMENTO"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "ANDREA SILVA BARRA"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "MARCELO PINTO"
+      }
+    ],
+    "situacao": "ATIVA",
+    "bairro": "SAUDE",
+    "logradouro": "R SACADURA CABRAL",
+    "numero": "102",
+    "cep": "20.081-902",
+    "municipio": "RIO DE JANEIRO",
+    "porte": "DEMAIS",
+    "abertura": "01/08/1966",
+    "natureza_juridica": "204-6 - Sociedade Anônima Aberta",
+    "cnpj": "33.014.556/0001-96",
+    "ultima_atualizacao": "2020-06-01T19:06:45.650Z",
+    "status": "OK",
+    "tipo": "MATRIZ",
+    "fantasia": "",
+    "complemento": "",
+    "efr": "",
+    "motivo_situacao": "",
+    "situacao_especial": "",
+    "data_situacao_especial": "",
+    "capital_social": "3846726298.30",
+    "extra": {
+      
+    },
+    "billing": {
+      "free": true,
+      "database": true
+    }
+  }
