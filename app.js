@@ -50,6 +50,10 @@ app.use('/avaliacoes', avaliacoesRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('/404', function(req, res){
+  res.send('what???', 404);
+});
 
 // error handler
 // app.use(function(err, req, res, next) {
