@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/line-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0" style="background-color: rgb(64,71,109);">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div><img src="assets/img/logo-site.png" style="height: 50px;"></div>
+                    <div class="sidebar-brand-text mx-3"><span>Orca</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index-dash.html"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="material-icons">bookmark</i><span>Histórico</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Forncedores</span></a></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn" id="sidebarToggle" type="button" style="box-shadow: 0 0 0 .2rem rgba(78,115,223,0);background-color: rgba(54,50,50,0);text-align: center;"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column mb-4" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background-color: red;">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Pesquisar">
+                                <div class="input-group-append"><button class="btn btn-primary py-0" type="button" style="background-color: rgb(64,71,109);"><i class="fas fa-search"></i></button></div>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown show d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu show dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter">3</span><i class="material-icons fa-fw">warning</i></a>
+                                    <div class="dropdown-menu dropdown-menu-right swing animated dropdown-list dropdown-menu-right animated--grow-in"
+                                        role="menu">
+                                        <h6 class="dropdown-header" style="background-color: rgb(103,119,168);">ALERTA</h6>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="mr-3">
+                                                <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">2 de Junho de 2020</span>
+                                                <p>Assinar contrato de cotação B</p>
+                                            </div>
+                                        </a>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="mr-3">
+                                                <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">2 de Junho de 2020</span>
+                                                <p>Prazo de pagamento está próximo do fim!</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="material-icons fa-fw">message</i><span class="badge badge-danger badge-counter">7</span></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
+                                        role="menu">
+                                        <h6 class="dropdown-header" style="background-color: rgb(103,119,168);">alerts center</h6>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/imgbox.png"></div>
+                                            <div class="font-weight-bold" style="width: 261px;">
+                                                <div class="text-truncate" style="width: 252px;"><span>Preciso confirmar a dimensão dos produtos</span></div>
+                                                <p class="small text-gray-500 mb-0">Fornecedor X - Licitação B</p>
+                                            </div>
+                                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
+                                </div>
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow" role="presentation">
+                                <div class="nav-item dropdown" href="profile.html"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="index-dash-fornecedor.html"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Lorena Sans</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.jpeg"></a>
+                                    <div
+                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="profile.html"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Perfil</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="index.html"><i class="icon ion-android-exit fa-sm fa-fw mr-2 text-gray-400"></i>Sair</a></div>
+                    </div>
+                    </li>
+                    </ul>
+            </div>
+            </nav><div class="container py-5">
+
+  <div class="row">
+    <div class="col-lg-7 mx-auto">
+      <div class="bg-white rounded-lg shadow-sm p-5">
+        <!-- Credit card form tabs -->
+        <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+          <li class="nav-item">
+            <a data-toggle="pill" href="#nav-tab-card" class="nav-link active rounded-pill">
+                                <i class="fa fa-credit-card"></i> Cartão de Crédito</a>
+          </li>
+          <li class="nav-item">
+            <a data-toggle="pill" href="#nav-tab-paypal" class="nav-link rounded-pill">
+                                <i class="fa fa-paypal"></i>
+                                Paypal
+                            </a>
+          </li>
+          <li class="nav-item">
+            <a data-toggle="pill" href="#nav-tab-bank" class="nav-link rounded-pill">
+                                <i class="fa fa-university"></i> Transferência</a>
+          </li>
+        </ul>
+        <!-- End -->
+
+
+        <!-- Credit card form content -->
+        <div class="tab-content">
+
+          <!-- credit card info-->
+          <div id="nav-tab-card" class="tab-pane fade show active">
+            <p class="alert alert-success">Pagamento feito com sucesso</p>
+            <form role="form">
+              <div class="form-group">
+                <label for="username">Nome Completo</label>
+                <input type="text" name="username" placeholder="Jeff Doe" required class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="cardNumber">Número Cartão</label>
+                <div class="input-group">
+                  <input type="text" name="cardNumber" placeholder="Your card number" class="form-control" required>
+                  <div class="input-group-append">
+                    <span class="input-group-text text-muted">
+                                                <i class="fa fa-cc-visa mx-1"></i>
+                                                <i class="fa fa-cc-amex mx-1"></i>
+                                                <i class="fa fa-cc-mastercard mx-1"></i>
+                                            </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <label><span class="hidden-xs">Expiration</span></label>
+                    <div class="input-group">
+                      <input type="number" placeholder="MM" name="" class="form-control" required>
+                      <input type="number" placeholder="YY" name="" class="form-control" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group mb-4">
+                    <label data-toggle="tooltip" title="Three-digits code on the back of your card">CVV
+                                                <i class="fa fa-question-circle"></i>
+                                            </label>
+                    <input type="text" required class="form-control">
+                  </div>
+                </div>
+
+
+
+              </div>
+              <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> Confirm  </button>
+            </form>
+          </div>
+          <!-- End -->
+
+          <!-- Paypal info -->
+          <div id="nav-tab-paypal" class="tab-pane fade">
+            <p>Paypal is easiest way to pay online</p>
+            <p>
+              <button type="button" class="btn btn-primary rounded-pill"><i class="fa fa-paypal mr-2"></i> Log into my Paypal</button>
+            </p>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+          <!-- End -->
+
+          <!-- bank transfer info -->
+          <div id="nav-tab-bank" class="tab-pane fade">
+            <h6>Bank account details</h6>
+            <dl>
+              <dt>Bank</dt>
+              <dd> THE WORLD BANK</dd>
+            </dl>
+            <dl>
+              <dt>Account number</dt>
+              <dd>7775877975</dd>
+            </dl>
+            <dl>
+              <dt>IBAN</dt>
+              <dd>CZ7775877975656</dd>
+            </dl>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+          <!-- End -->
+        </div>
+        <!-- End -->
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Projeto Orca - Digital House</span></div>
+            </div>
+        </footer>
+    </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>
