@@ -12,14 +12,14 @@
     </div>
 
     <div class="register-form">
-      <form action="/usuarios/cadastrar" method="POST">
-        <input placeholder="Digite seu nome" />
+      <form action="/usuarios/cadastrar" method="POST" enctype="application/x-www-form-urlencoded" >
+        <input name="nome" placeholder="Digite seu nome" />
 
-        <input type="email" placeholder="Digite seu melhor e-mail" />
+        <input name="email" type="email" placeholder="Digite seu melhor e-mail" />
 
-        <input placeholder="Digite seu CPF" />
+        <input name="cpf" placeholder="Digite seu CPF" />
 
-        <input type="senha" placeholder="Digite uma senha" />
+        <input name="senha" type="senha" placeholder="Digite uma senha" />
 
         <button class="button" type="submit">Cadastrar</button>
 

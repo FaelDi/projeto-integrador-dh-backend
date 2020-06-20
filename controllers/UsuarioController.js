@@ -125,7 +125,7 @@ module.exports = {
 	new: async (req, res) => {
 		try {
 			const { cpf, ...data } = req.body;
-
+			console.log(req.body.cpf)
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
 
@@ -137,6 +137,7 @@ module.exports = {
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
+				console.log("cpf ok")
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
@@ -147,8 +148,8 @@ module.exports = {
 
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
-				where: { cpf: cpf },
-				where: { email: data.email },
+				where: { cpf: cpf,
+					     email: data.email },
 				defaults: { ...data }
 			});
 
@@ -205,11 +206,12 @@ module.exports = {
 	},
 
 	delete: async (req, res) => {
+		console.log(id)
 		try {
 			const { id } = req.params;
 			const user = await Usuario.findByPk(id);
 			user.destroy();
-
+			
 			return res.status(200).json(user);
 		} catch{
 			return res.status(400).json({ err });
