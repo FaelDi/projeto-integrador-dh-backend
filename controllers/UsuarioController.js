@@ -90,7 +90,7 @@ module.exports = {
 			const token = jwt.sign({ user: user.id })
 
 			// Renderiza a view de usuario logado
-			res.render("index-dash", { user, token });
+			res.render("dash-index", { user, token });
 			// res.send({ user, token });
 		} catch (err) {
 			res.send({ erro: err })
