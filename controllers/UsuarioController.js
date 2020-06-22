@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const fetch = require("node-fetch");
 
 const buscaCnpj = async (cep) => {
-	let res = await fetch(`https://viacep.com.br/ws/`+cep+`/json/`)
+	let res = await fetch(`https://viacep.com.br/ws/` + cep + `/json/`)
 	const data = await res.json();
 	return data;
 };
@@ -43,15 +43,15 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
-	cep: async (req,res) =>  {
+	cep: async (req, res) => {
 		try {
 			if (req.params.cep.length == 8) {
-			const adress = await buscaCnpj();
-			if (adress.status == "ERROR") {
-				res.render('error404.ejs').json({ result: "Erro ao consultar cep!" });
-			};
-			return res.status(200).json(adress);
-			}else{
+				const adress = await buscaCnpj();
+				if (adress.status == "ERROR") {
+					res.render('error404.ejs').json({ result: "Erro ao consultar cep!" });
+				};
+				return res.status(200).json(adress);
+			} else {
 				res.render('error404.ejs').json({ result: "Cep inválido!" });
 			}
 		} catch (err) {
@@ -60,7 +60,7 @@ module.exports = {
 				message: err.message
 			});
 		};
-		
+
 	},
 
 	login: async (req, res) => {
@@ -132,30 +132,34 @@ module.exports = {
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email.match(regexEmail)) {
-				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				console.log('O email fornecido parece inválido. Verifique e tente novamente!');
+				return res.render('error404');
 			};
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
-				console.log("cpf ok")
-				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
+				console.log("O cpf fornecido parece inválido. Verifique e tente novamente!");
+				return res.render('error404');
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
-				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+				console.log("O nome fornecido parece inválido ou vazio. Verifique e tente novamente!");
+				return res.render('error404');
 			};
 
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
-				where: { cpf: cpf,
-					     email: data.email },
+				where: {
+					cpf: cpf,
+					email: data.email
+				},
 				defaults: { ...data }
 			});
 
 			req.session.usuario = result
 
-			return res.redirect('dash-index', 201);
+			return res.redirect('/me', 201);
 
 		} catch (err) {
 			console.log(err)
@@ -208,7 +212,7 @@ module.exports = {
 			const { id } = req.params;
 			const user = await Usuario.findByPk(id);
 			user.destroy();
-			
+
 			return res.status(200).json(user);
 		} catch (err) {
 			return res.render('error404.ejs').json({ err });
