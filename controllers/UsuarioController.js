@@ -1,9 +1,8 @@
 const { Usuario, Pagamento, Empresa } = require("../models");
-const jwt = require('../config/jwt');
 const bcrypt = require("bcrypt");
 const fetch = require("node-fetch");
 
-const buscaCnpj = async (cep) => {
+const consultaCEP = async (cep) => {
 	let res = await fetch(`https://viacep.com.br/ws/` + cep + `/json/`)
 	const data = await res.json();
 	return data;
@@ -43,19 +42,23 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
+	show: async (req, res) => {
+
+	},
+	// Modulo CEP faz a consulta do cep e não mais do cnpj
 	cep: async (req, res) => {
 		try {
 			if (req.params.cep.length == 8) {
-				const adress = await buscaCnpj();
-				if (adress.status == "ERROR") {
-					res.render('error404.ejs').json({ result: "Erro ao consultar cep!" });
+				const address = await consultaCEP();
+				if (address.status == "ERROR") {
+					res.render('error404');
 				};
-				return res.status(200).json(adress);
+				return res.status(200).json(address);
 			} else {
-				res.render('error404.ejs').json({ result: "Cep inválido!" });
+				res.render('error404').json({ result: "Cep inválido!" });
 			}
 		} catch (err) {
-			return res.render('error404.ejs').json({
+			return res.render('error404').json({
 				result: "Erro ao consultar cep",
 				message: err.message
 			});
@@ -87,13 +90,12 @@ module.exports = {
 			};
 
 			// Envia um json web token para autenticação do usuario
-			const token = jwt.sign({ user: user.id });
 
 			// Renderiza a view de usuario logado
-			res.render("dash-index", { user, token });
+			res.render("dash-index", { user });
 			// res.send({ user, token });
 		} catch (err) {
-			return res.render('404.ejs');
+			return res.render('404');
 		};
 	},
 
@@ -107,7 +109,7 @@ module.exports = {
 		if (users !== null) {
 			return res.status(200).json(users);
 		} else {
-			return res.render('error404.ejs').json({ err: 'Não existe usuário cadastado!' });
+			return res.render('error404').json({ err: 'Não existe usuário cadastado!' });
 		}
 	},
 
@@ -118,7 +120,7 @@ module.exports = {
 		if (user !== null) {
 			return res.status(200).json(user);
 		} else {
-			return res.render('error404.ejs').json({ err: 'Usuário  não foi encontrado!' });
+			return res.render('error404').json({ err: 'Usuário  não foi encontrado!' });
 		}
 	},
 
@@ -185,13 +187,13 @@ module.exports = {
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email && !data.email.match(regexEmail)) {
 				// Verifica se email null e se o formato é valido
-				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length < 3) {
 				// Valida se nome é null
-				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
 			};
 
 			// Faz update com os novos dados passados para o user
@@ -215,7 +217,7 @@ module.exports = {
 
 			return res.status(200).json(user);
 		} catch (err) {
-			return res.render('error404.ejs').json({ err });
+			return res.render('error404').json({ err });
 		};
 	},
 };
