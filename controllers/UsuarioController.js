@@ -42,8 +42,9 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
+	// Retorna a página de login
 	show: async (req, res) => {
-
+		res.render("dash-index", { user });
 	},
 	// Modulo CEP faz a consulta do cep e não mais do cnpj
 	cep: async (req, res) => {
