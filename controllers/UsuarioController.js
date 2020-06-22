@@ -3,12 +3,11 @@ const jwt = require('../config/jwt');
 const bcrypt = require("bcrypt");
 const fetch = require("node-fetch");
 
-
 const buscaCnpj = async (cep) => {
 	let res = await fetch(`https://viacep.com.br/ws/`+cep+`/json/`)
 	const data = await res.json();
 	return data;
-}
+};
 
 // Função para validar CPF (fonte Receita Federal)
 function validarCPF(cpf) {
@@ -49,14 +48,14 @@ module.exports = {
 			if (req.params.cep.length == 8) {
 			const adress = await buscaCnpj();
 			if (adress.status == "ERROR") {
-				res.status(400).json({ result: "Erro ao consultar cep!!" });
+				res.render('error404.ejs').json({ result: "Erro ao consultar cep!!" });
 			};
 			return res.status(200).json(adress);
 			}else{
-				res.status(400).json({ result: "Cep inválido!" });
+				res.render('error404.ejs').json({ result: "Cep inválido!" });
 			}
 		} catch (err) {
-			return res.status(400).json({
+			return res.render('error404.ejs').json({
 				result: "Erro ao consultar cep",
 				message: err.message
 			});
@@ -93,7 +92,7 @@ module.exports = {
 			res.render("dash-index", { user, token });
 			// res.send({ user, token });
 		} catch (err) {
-			res.send({ erro: err })
+			return res.render('404.ejs')
 		};
 	},
 
@@ -107,7 +106,7 @@ module.exports = {
 		if (users !== null) {
 			return res.status(200).json(users);
 		} else {
-			return res.status(400).json({ err: 'Não existe usuário cadastado!' });
+			return res.render('error404.ejs').json({ err: 'Não existe usuário cadastado!' });
 		}
 	},
 
@@ -118,7 +117,7 @@ module.exports = {
 		if (user !== null) {
 			return res.status(200).json(user);
 		} else {
-			return res.status(400).json({ err: 'Usuário  não foi encontrado!' });
+			return res.render('error404.ejs').json({ err: 'Usuário  não foi encontrado!' });
 		}
 	},
 
@@ -132,18 +131,18 @@ module.exports = {
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email.match(regexEmail)) {
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
 				console.log("cpf ok")
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
 			}
 
 			// Busca um usuario pelo cpf e se não existir o cria
@@ -159,7 +158,7 @@ module.exports = {
 			return res.status(200).json({ result: result });
 
 		} catch (err) {
-			return res.status(400).json({
+			return res.render('error404.ejs').json({
 				result: "Erro ao criar usuário",
 				message: err.message
 			});
@@ -184,13 +183,13 @@ module.exports = {
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email && !data.email.match(regexEmail)) {
 				// Verifica se email null e se o formato é valido
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length < 3) {
 				// Valida se nome é null
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
 			}
 
 			// Faz update com os novos dados passados para o user
@@ -214,7 +213,7 @@ module.exports = {
 			
 			return res.status(200).json(user);
 		} catch{
-			return res.status(400).json({ err });
+			return res.render('error404.ejs').json({ err });
 		}
 	},
 }
