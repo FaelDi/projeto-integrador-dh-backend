@@ -48,7 +48,7 @@ module.exports = {
 			if (req.params.cep.length == 8) {
 			const adress = await buscaCnpj();
 			if (adress.status == "ERROR") {
-				res.render('error404.ejs').json({ result: "Erro ao consultar cep!!" });
+				res.render('error404.ejs').json({ result: "Erro ao consultar cep!" });
 			};
 			return res.status(200).json(adress);
 			}else{
@@ -62,6 +62,7 @@ module.exports = {
 		};
 		
 	},
+
 	login: async (req, res) => {
 		// const [, hash] = req.headers.authorization.split(' ');
 		// let [email, senha] = Buffer.from(hash, 'base64')
@@ -86,13 +87,13 @@ module.exports = {
 			};
 
 			// Envia um json web token para autenticação do usuario
-			const token = jwt.sign({ user: user.id })
+			const token = jwt.sign({ user: user.id });
 
 			// Renderiza a view de usuario logado
 			res.render("dash-index", { user, token });
 			// res.send({ user, token });
 		} catch (err) {
-			return res.render('404.ejs')
+			return res.render('404.ejs');
 		};
 	},
 
@@ -111,7 +112,7 @@ module.exports = {
 	},
 
 	search: async (req, res) => {
-		let id = req.params.id
+		let id = req.params.id;
 
 		let user = await Usuario.findByPk(id);
 		if (user !== null) {
@@ -124,7 +125,7 @@ module.exports = {
 	new: async (req, res) => {
 		try {
 			const { cpf, ...data } = req.body;
-			console.log(req.body.cpf)
+			console.log(req.body.cpf);
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
 
@@ -137,13 +138,13 @@ module.exports = {
 			// CPF Validation
 			if (!validarCPF(cpf)) {
 				console.log("cpf ok")
-				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
-				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
-			}
+				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+			};
 
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
@@ -152,16 +153,13 @@ module.exports = {
 				defaults: { ...data }
 			});
 
-			// Gera um token para mandar no response e autenticar usuario
-			// const token = jwt.sign({ user: result.dataValues.id });
+			req.session.usuario = result
 
-			return res.status(200).json({ result: result });
+			return res.redirect('dash-index', 201);
 
 		} catch (err) {
-			return res.render('error404.ejs').json({
-				result: "Erro ao criar usuário",
-				message: err.message
-			});
+			console.log(err)
+			return res.render('error404')
 		};
 	},
 
@@ -173,8 +171,8 @@ module.exports = {
 
 			// Compara a senha antiga com o hash gravado
 			if (!bcrypt.compareSync(data.senha0, user.senha)) {
-				throw new Error("Senha inválida") // Retorna Forbidden se senha não confere
-			}
+				throw new Error("Senha inválida"); // Retorna Forbidden se senha não confere
+			};
 
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
@@ -190,7 +188,7 @@ module.exports = {
 			if (!(data.nome) && data.nome.length < 3) {
 				// Valida se nome é null
 				return res.render('error404.ejs').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
-			}
+			};
 
 			// Faz update com os novos dados passados para o user
 			user.update(data);
@@ -201,7 +199,7 @@ module.exports = {
 				result: "Erro ao alterar usuário",
 				message: err.message
 			});
-		}
+		};
 	},
 
 	delete: async (req, res) => {
@@ -212,9 +210,9 @@ module.exports = {
 			user.destroy();
 			
 			return res.status(200).json(user);
-		} catch{
+		} catch (err) {
 			return res.render('error404.ejs').json({ err });
-		}
+		};
 	},
-}
+};
 
