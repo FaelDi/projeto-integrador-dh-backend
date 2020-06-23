@@ -1,3 +1,5 @@
+//configurar o Sequelize para encontrar os arquivos nas pastas pra onde os movemos
+
 const path = require('path');
 
 module.exports = {
