@@ -1,0 +1,190 @@
+{
+    "atividade_principal": [
+      {
+        "text": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - hipermercados",
+        "code": "47.11-3-01"
+      }
+    ],
+    "data_situacao": "03/11/2005",
+    "nome": "CARREFOUR COMERCIO E INDUSTRIA LTDA",
+    "uf": "SP",
+    "email": "carrefour@carrefour.com",
+    "atividades_secundarias": [
+      {
+        "text": "Comércio atacadista de outros equipamentos e artigos de uso pessoal e doméstico não especificados anteriormente",
+        "code": "46.49-4-99"
+      },
+      {
+        "text": "Comércio varejista de outros artigos de uso pessoal e doméstico não especificados anteriormente",
+        "code": "47.59-8-99"
+      },
+      {
+        "text": "Lanchonetes, casas de chá, de sucos e similares",
+        "code": "56.11-2-03"
+      },
+      {
+        "text": "Fornecimento de alimentos preparados preponderantemente para consumo domiciliar",
+        "code": "56.20-1-04"
+      },
+      {
+        "text": "Peixaria",
+        "code": "47.22-9-02"
+      },
+      {
+        "text": "Comércio varejista de carnes - açougues",
+        "code": "47.22-9-01"
+      },
+      {
+        "text": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - supermercados",
+        "code": "47.11-3-02"
+      },
+      {
+        "text": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - minimercados, mercearias e armazéns",
+        "code": "47.12-1-00"
+      },
+      {
+        "text": "Correspondentes de instituições financeiras",
+        "code": "66.19-3-02"
+      },
+      {
+        "text": "Laboratórios fotográficos",
+        "code": "74.20-0-03"
+      },
+      {
+        "text": "Comércio varejista de combustíveis para veículos automotores",
+        "code": "47.31-8-00"
+      },
+      {
+        "text": "Outras atividades de telecomunicações não especificadas anteriormente",
+        "code": "61.90-6-99"
+      },
+      {
+        "text": "Comércio varejista de mercadorias em lojas de conveniência",
+        "code": "47.29-6-02"
+      },
+      {
+        "text": "Depósitos de mercadorias para terceiros, exceto armazéns gerais e guarda-móveis",
+        "code": "52.11-7-99"
+      },
+      {
+        "text": "Serviços combinados de escritório e apoio administrativo",
+        "code": "82.11-3-00"
+      },
+      {
+        "text": "Atividades de intermediação e agenciamento de serviços e negócios em geral, exceto imobiliários",
+        "code": "74.90-1-04"
+      },
+      {
+        "text": "Comércio varejista de lubrificantes",
+        "code": "47.32-6-00"
+      },
+      {
+        "text": "Transporte rodoviário de carga, exceto produtos perigosos e mudanças, intermunicipal, interestadual e internacional",
+        "code": "49.30-2-02"
+      },
+      {
+        "text": "Comércio atacadista de mercadorias em geral, com predominância de produtos alimentícios",
+        "code": "46.91-5-00"
+      },
+      {
+        "text": "Comércio atacadista de mercadorias em geral, sem predominância de alimentos ou de insumos agropecuários",
+        "code": "46.93-1-00"
+      },
+      {
+        "text": "Comercio varejista de artigos de armarinho",
+        "code": "47.55-5-02"
+      },
+      {
+        "text": "Comércio varejista de produtos farmacêuticos, sem manipulação de fórmulas",
+        "code": "47.71-7-01"
+      },
+      {
+        "text": "Outras atividades de serviços prestados principalmente às empresas não especificadas anteriormente",
+        "code": "82.99-7-99"
+      },
+      {
+        "text": "Transporte rodoviário de carga, exceto produtos perigosos e mudanças, municipal.",
+        "code": "49.30-2-01"
+      },
+      {
+        "text": "Comércio varejista de cosméticos, produtos de perfumaria e de higiene pessoal",
+        "code": "47.72-5-00"
+      },
+      {
+        "text": "Padaria e confeitaria com predominância de revenda",
+        "code": "47.21-1-02"
+      },
+      {
+        "text": "Fabricação de produtos de padaria e confeitaria com predominância de produção própria",
+        "code": "10.91-1-02"
+      },
+      {
+        "text": "Comércio varejista de produtos alimentícios em geral ou especializado em produtos alimentícios não especificados anteriormente",
+        "code": "47.29-6-99"
+      },
+      {
+        "text": "Comércio varejista especializado de eletrodomésticos e equipamentos de áudio e vídeo",
+        "code": "47.53-9-00"
+      },
+      {
+        "text": "Comércio varejista de artigos médicos e ortopédicos",
+        "code": "47.73-3-00"
+      }
+    ],
+    "qsa": [
+      {
+        "qual": "05-Administrador",
+        "nome": "STEPHANE FRANTZ EMMANUEL ENGELHARD"
+      },
+      {
+        "qual": "05-Administrador",
+        "nome": "SEBASTIEN DURCHON"
+      },
+      {
+        "qual": "22-Sócio",
+        "qual_rep_legal": "05-Administrador",
+        "nome_rep_legal": "NOEL FREDERIC GEORGES PRIOUX",
+        "nome": "ATACADAO S.A."
+      },
+      {
+        "qual": "05-Administrador",
+        "nome": "JOSE LUIS GUTIERREZ PEREZ"
+      },
+      {
+        "qual": "05-Administrador",
+        "nome": "MARCO TULIO SOARES VAZ DE MELO"
+      },
+      {
+        "qual": "49-Sócio-Administrador",
+        "nome": "NOEL FREDERIC GEORGES PRIOUX"
+      }
+    ],
+    "situacao": "ATIVA",
+    "bairro": "VL TRAMONTANO",
+    "logradouro": "R GEORGE EASTMAN",
+    "numero": "213",
+    "cep": "05.690-000",
+    "municipio": "SAO PAULO",
+    "porte": "DEMAIS",
+    "abertura": "21/06/1974",
+    "natureza_juridica": "206-2 - Sociedade Empresária Limitada",
+    "cnpj": "45.543.915/0001-81",
+    "ultima_atualizacao": "2020-05-26T12:58:11.757Z",
+    "status": "OK",
+    "tipo": "MATRIZ",
+    "fantasia": "",
+    "complemento": "",
+    "telefone": "",
+    "efr": "",
+    "motivo_situacao": "",
+    "situacao_especial": "",
+    "data_situacao_especial": "",
+    "capital_social": "5314485661.42",
+    "extra": {
+
+    },
+    "billing": {
+      "free": true,
+      "database": true
+    }
+  } 
