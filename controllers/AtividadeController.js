@@ -1,4 +1,4 @@
-const { Atividade,  Usuario, Avaliacao, Empresa } = require("../models");
+const { Atividade, Usuario, Avaliacao, Empresa } = require("../models");
 
 module.exports = {
 	index: async (req, res) => {
