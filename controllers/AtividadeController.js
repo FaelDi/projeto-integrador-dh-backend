@@ -1,4 +1,4 @@
-const { Atividade,  Usuario, Avaliacao, Empresa } = require("../models");
+const { Atividade, Usuario, Avaliacao, Empresa } = require("../models");
 
 module.exports = {
 	index: async (req, res) => {
@@ -6,7 +6,7 @@ module.exports = {
 		if (atividades !== null) {
 			res.send(atividades);
 		} else {
-			res.send("Nao há atividades cadastradas");
+			res.send("Não há atividades cadastradas");
 		}
 	},
 	search: async (req, res) => {
@@ -16,7 +16,7 @@ module.exports = {
 		if (atividade !== null) {
 			res.send(atividade);
 		} else {
-			res.send("Avaliacao nao encontrado");
+			res.send("Avaliação não encontrada");
 		}
 	},
 	new: async (req, res) => {
