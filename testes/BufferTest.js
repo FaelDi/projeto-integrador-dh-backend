@@ -1,3 +1,5 @@
+
+//Example on how to verify a password from database
 let hash0 = "A23537MO$1asdj";
 let hash1 = "123456789abcdefghijklmnopqrstuvwxyz";
 let hash2 = "a1b2c3d4e5f6";
