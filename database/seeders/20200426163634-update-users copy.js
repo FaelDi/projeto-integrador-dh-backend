@@ -72,7 +72,6 @@ module.exports = {
         "celular": "(11) 99671-9294"
       },
       {
-
         "nome": "Ryan Luís Heitor Pinto",
         "idade": 60,
         "cpf": "279.850.878-93",
@@ -88,6 +87,23 @@ module.exports = {
         "uf": "SP",
         "telefone": "(11) 2520-2002",
         "celular": "(11) 98822-4222"
+      },
+      {
+        "nome": "Ana Claudia de Paula",
+        "idade": 32,
+        "cpf": "219.864.677-41",
+        "rg": "11.225.577-1",
+        "data_nasc": "20/06/1988",
+        "email": "ana@gmail.com",
+        "senha": "123anabanana",
+        "cep": "1802-256",
+        "rua": "Rua Claudia Leão",
+        "numero": 154,
+        "bairro": "Jardim das Flores",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "telefone": "(11) 2230-2324",
+        "celular": "(11) 95422-4233"
       }
   ], {}),
 
