@@ -86,7 +86,7 @@ module.exports = {
 			req.session.usuario = user;
 
 			// Renderiza a view de usuario logado
-			return res.redirect('/me');
+			return res.redirect('back');
 		} catch (err) {
 			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
@@ -99,7 +99,7 @@ module.exports = {
 				{ model: Empresa, as: 'empresa' }
 			],
 		});
-		if (users !== null) {
+		if (users) {
 			return res.status(200).json(users);
 		} else {
 			return res.render('404', { err: 'Não existe usuário cadastado!' });
@@ -110,7 +110,7 @@ module.exports = {
 		let id = req.params.id;
 
 		let user = await Usuario.findByPk(id);
-		if (user !== null) {
+		if (user) {
 			return res.render('profile', { user })
 		} else {
 			return res.render('404', { err: 'Usuário  não foi encontrado!' });
@@ -187,7 +187,7 @@ module.exports = {
 
 			// Faz update com os novos dados passados para o user
 			user.update(data);
-			return res.status(200).json(user);
+			return res.render('profile', { user })
 
 		} catch (err) {
 			return res.render('400', { err: err });
