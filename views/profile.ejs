@@ -15,11 +15,15 @@
                     <div class="row mb-3">
                         <div class="col-lg-4">
                             <div class="card mb-3">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
-                                        src="assets/img/avatars/default.jpeg" width="160" height="160">
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button"
+                                <div class="card-body text-center shadow">
+                                    <img class="rounded-circle mb-3 mt-4" src="https://faramalaw.com/images/male.jpg"
+                                        alt='user-icon' width="160" height="160" style="margin: auto;">
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary btn-sm" type="choose"
                                             style="background-color: rgb(7,190,184);border-color: rgb(7,190,184);">Mudar
-                                            Foto</button></div>
+                                            Foto
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card shadow mb-4">
@@ -94,39 +98,39 @@
                                                 style="color: rgb(103,119,167);">Dados</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form action="/usuarios/<%= user.id %>" method="PUT">
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label
                                                                 for="username"><strong>CPF</strong></label><input
-                                                                class="form-control" type="text"
-                                                                placeholder="<%= user.cpf %>" name="nome"></div>
+                                                                class="form-control" type="text" value="<%= user.cpf %>"
+                                                                name="nome"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group"><label
                                                                 for="email"><strong>E-mail</strong></label><input
                                                                 class="form-control" type="email"
-                                                                placeholder="<%= user.email %>" name="email">
+                                                                value="<%= user.email %>" name="email">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <label for="first_name"><strong>Empresa</strong></label>
-                                                            <input class="form-control" type="text" placeholder="Lorena"
-                                                                name="first_name">
+                                                            <label for="first_name"><strong>Celular</strong></label>
+                                                            <input class="form-control" type="text"
+                                                                value="<%- user.celular %>" name="first_name">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="nome"><strong>Nome</strong></label>
                                                             <input class="form-control" type="text"
-                                                                placeholder="<%= user.nome %>" name="nome"></div>
+                                                                value="<%= user.nome %>" name="nome"></div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm"
-                                                        type="submit"
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" type="submit"
                                                         style="background-color: rgb(7,190,184);border-color: rgb(7,190,184);">salvar</button>
                                                 </div>
                                             </form>
@@ -143,22 +147,21 @@
                                                 <div class="form-group">
                                                     <label for="endereco"><strong>Endereço</strong></label>
                                                     <input class="form-control" type="text"
-                                                        placeholder="<%= user.rua %>, <%= user.numero %>"
-                                                        name="endereco">
+                                                        value="<%= user.rua %>, <%= user.numero %>" name="endereco">
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="cidade"><strong>Cidade</strong></label>
                                                             <input class="form-control" type="text"
-                                                                placeholder="<%= user.cidade %>" name="cidade">
+                                                                value="<%= user.cidade %>" name="cidade">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="uf"><strong>Estado</strong><br></label>
                                                             <input class="form-control" type="text"
-                                                                placeholder="<%= user.uf %>" name="uf">
+                                                                value="<%= user.uf %>" name="uf">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -167,14 +170,14 @@
                                                         <div class="form-group">
                                                             <label for="cidade"><strong>CEP</strong></label>
                                                             <input class="form-control" type="text"
-                                                                placeholder="<%= user.cep %>" name="cidade">
+                                                                value="<%= user.cep %>" name="cidade">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="uf"><strong>Bairro</strong><br></label>
                                                             <input class="form-control" type="text"
-                                                                placeholder="<%= user.bairro %>" name="uf">
+                                                                value="<%= user.bairro %>" name="uf">
                                                         </div>
                                                     </div>
                                                 </div>
