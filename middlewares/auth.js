@@ -1,10 +1,11 @@
-const { Usuario, Pagamento, Empresa } = require("../models");
+// Função de login e verificação de autenticação
 
 module.exports = (req, res, next) => {
-  console.log(req.session.usuario)
+  // Verifica se há uma sessão de usuario criada
   if (req.session.usuario) {
     next();
   } else {
-    res.render("login", { err: "É necessário login para acessar a página!", display: '' });
+    // Requere o login para a área restrita
+    return res.render("login", { err: "É necessário login para acessar a página!", display: '' });
   };
 };

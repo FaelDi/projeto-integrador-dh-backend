@@ -42,15 +42,12 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
-	// Retorna a dashboard
+	// Retorna a dashboard para usuario autenticado
 	show: async (req, res) => {
 		let user = await req.session.usuario;
-
-		console.log(user);
-
 		return res.render("dash-index", { user });
 	},
-	// Modulo CEP faz a consulta do cep e não mais do cnpj
+	// Modulo CEP faz a consulta do cep
 	cep: async (req, res) => {
 		try {
 			if (req.params.cep.length == 8) {
@@ -89,8 +86,7 @@ module.exports = {
 			req.session.usuario = user;
 
 			// Renderiza a view de usuario logado
-			res.redirect('/me');
-			// return res.render("dash-index", { user });
+			return res.redirect('/me');
 		} catch (err) {
 			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
@@ -180,13 +176,13 @@ module.exports = {
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email && !data.email.match(regexEmail)) {
 				// Verifica se email null e se o formato é valido
-				return res.render('404', { err: "Erro ao criar usuário. O email fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('login', { err: "Email inválido", display: "" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length < 3) {
 				// Valida se nome é null
-				return res.render('404', { err: "Erro ao criar usuário. O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+				return res.render('login', { err: "Nome inválido", display: "" });
 			};
 
 			// Faz update com os novos dados passados para o user
@@ -194,7 +190,7 @@ module.exports = {
 			return res.status(200).json(user);
 
 		} catch (err) {
-			return res.render('401', { err: err });
+			return res.render('400', { err: err });
 		};
 	},
 
@@ -204,9 +200,9 @@ module.exports = {
 			const user = await Usuario.findByPk(id);
 			user.destroy();
 
-			return res.status(200).json(user);
+			return res.redirect(200, '/');
 		} catch (err) {
-			return res.render('404', { err: err });
+			return res.render('400', { err: err });
 		};
 	},
 };
