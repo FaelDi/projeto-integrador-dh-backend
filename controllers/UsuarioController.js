@@ -87,7 +87,7 @@ module.exports = {
 			// Renderiza a view de usuario logado
 			res.render("dash-index", { user });
 		} catch (err) {
-			return res.render('404', { err: err, display: "" });
+			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
 	},
 
@@ -126,24 +126,21 @@ module.exports = {
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email.match(regexEmail)) {
-				console.log('O email fornecido parece inválido. Verifique e tente novamente!');
-				return res.render('404');;
+				return res.render('login', { err: "Email inválido", display: "" });
 			};
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
-				console.log("O cpf fornecido parece inválido. Verifique e tente novamente!");
-				return res.render('404');;
+				return res.render('login', { err: "CPF inválido", display: "" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
-				console.log("O nome fornecido parece inválido ou vazio. Verifique e tente novamente!");
-				return res.render('404');;
+				return res.render('login', { err: "Nome inválido", display: "" });
 			};
 
 			// Busca um usuario pelo cpf e se não existir o cria
-			const [result] = await Usuario.findOrCreate({
+			const [user] = await Usuario.findOrCreate({
 				where: {
 					cpf: cpf,
 					email: data.email
@@ -151,12 +148,12 @@ module.exports = {
 				defaults: { ...data }
 			});
 
-			req.session.usuario = result;
+			req.session.usuario = user;
 
 			res.render("dash-index", { user });
 
 		} catch (err) {
-			return res.render('404', { err: err });
+			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
 	},
 
