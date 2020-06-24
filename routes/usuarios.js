@@ -10,7 +10,5 @@ router.get('/:id', /*authMiddleware,*/ UsuarioController.search);
 router.put('/:id', /*authMiddleware,*/ UsuarioController.update);
 router.delete('/:id', /*authMiddleware,*/ UsuarioController.delete);
 router.get("/cep/:cep", /*authMiddleware,*/ UsuarioController.cep);
-// router.get("/:id/companies",UsuarioController.companies);
-//router.get('/:id/profile',UsuarioController.profile);
 
 module.exports = router;
