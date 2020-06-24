@@ -191,6 +191,12 @@ module.exports = {
 				};
 			};
 
+			// Endereco validation
+			if (data.endereco) {
+				data.rua = data.endereco.split(',')[0].trim();
+				data.numero = data.endereco.split(',')[1].trim();
+			};
+
 			// Faz update com os novos dados passados para o user
 			user.update(data);
 			return res.render('profile', { user })
