@@ -1,0 +1,31 @@
+<%- include('parts/head', {title:'Registrar', page: 'register'}); %>
+
+<div class="main_container">
+
+  <section class="bloco">
+    <div class="register-info">
+      <h1>Cadastro</h1>
+      <p>Faça seu cadastro, entre na plataforma e envie ou receba orçamentos...</p>
+      <a href="/login" class="back-link">
+        Já tenho Login!
+      </a>
+    </div>
+
+    <div class="register-form">
+      <form action="/usuarios/cadastrar" method="POST" enctype="application/x-www-form-urlencoded" >
+        <input name="nome" placeholder="Digite seu nome" />
+
+        <input name="email" type="email" placeholder="Digite seu melhor e-mail" />
+
+        <input name="cpf" placeholder="Digite seu CPF" />
+
+        <input name="senha" type="senha" placeholder="Digite uma senha" />
+
+        <button class="button" type="submit">Cadastrar</button>
+
+      </form>
+    </div>
+  </section>
+</div>
+
+<%- include('parts/foot'); %>

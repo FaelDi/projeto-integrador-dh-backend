@@ -1,12 +1,10 @@
 const { Usuario, Pagamento, Empresa } = require("../models");
-const jwt = require('../config/jwt');
 
 const authMiddleware = async (req, res, next) => {
   try {
     // [, token] taken the second element splited
     const [, token] = req.headers.authorization ? req.headers.authorization.split(' ') : null;
     // console.log(req.headers.authorization)
-    const payload = await jwt.verify(token);
     // console.log(payload.user);
 
     const user = await Usuario.findByPk(payload.user);

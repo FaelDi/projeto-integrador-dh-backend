@@ -1,14 +1,12 @@
 const { Usuario, Pagamento, Empresa } = require("../models");
-const jwt = require('../config/jwt');
 const bcrypt = require("bcrypt");
 const fetch = require("node-fetch");
 
-
-const buscaCnpj = async (cep) => {
-	let res = await fetch(`https://viacep.com.br/ws/`+cep+`/json/`)
+const consultaCEP = async (cep) => {
+	let res = await fetch(`https://viacep.com.br/ws/` + cep + `/json/`)
 	const data = await res.json();
 	return data;
-}
+};
 
 // Função para validar CPF (fonte Receita Federal)
 function validarCPF(cpf) {
@@ -44,25 +42,31 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
-	cep: async (req,res) =>  {
+	// Retorna a página de login
+	show: async (req, res) => {
+		res.render("dash-index", { user });
+	},
+	// Modulo CEP faz a consulta do cep e não mais do cnpj
+	cep: async (req, res) => {
 		try {
 			if (req.params.cep.length == 8) {
-			const adress = await buscaCnpj();
-			if (adress.status == "ERROR") {
-				res.status(400).json({ result: "Erro ao consultar cep!!" });
-			};
-			return res.status(200).json(adress);
-			}else{
-				res.status(400).json({ result: "Cep inválido!" });
+				const address = await consultaCEP();
+				if (address.status == "ERROR") {
+					res.render('error404');
+				};
+				return res.status(200).json(address);
+			} else {
+				res.render('error404').json({ result: "Cep inválido!" });
 			}
 		} catch (err) {
-			return res.status(400).json({
+			return res.render('error404').json({
 				result: "Erro ao consultar cep",
 				message: err.message
 			});
 		};
-		
+
 	},
+
 	login: async (req, res) => {
 		// const [, hash] = req.headers.authorization.split(' ');
 		// let [email, senha] = Buffer.from(hash, 'base64')
@@ -87,13 +91,12 @@ module.exports = {
 			};
 
 			// Envia um json web token para autenticação do usuario
-			const token = jwt.sign({ user: user.id })
 
 			// Renderiza a view de usuario logado
-			res.render("dash-index", { user, token });
+			res.render("dash-index", { user });
 			// res.send({ user, token });
 		} catch (err) {
-			res.send({ erro: err })
+			return res.render('404');
 		};
 	},
 
@@ -107,61 +110,63 @@ module.exports = {
 		if (users !== null) {
 			return res.status(200).json(users);
 		} else {
-			return res.status(400).json({ err: 'Não existe usuário cadastado!' });
+			return res.render('error404').json({ err: 'Não existe usuário cadastado!' });
 		}
 	},
 
 	search: async (req, res) => {
-		let id = req.params.id
+		let id = req.params.id;
 
 		let user = await Usuario.findByPk(id);
 		if (user !== null) {
 			return res.status(200).json(user);
 		} else {
-			return res.status(400).json({ err: 'Usuário  não foi encontrado!' });
+			return res.render('error404').json({ err: 'Usuário  não foi encontrado!' });
 		}
 	},
 
 	new: async (req, res) => {
 		try {
 			const { cpf, ...data } = req.body;
-
+			console.log(req.body.cpf);
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
 
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email.match(regexEmail)) {
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				console.log('O email fornecido parece inválido. Verifique e tente novamente!');
+				return res.render('error404');
 			};
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O CPF fornecido parece inválido. Verifique e tente novamente!" });
+				console.log("O cpf fornecido parece inválido. Verifique e tente novamente!");
+				return res.render('error404');
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
-			}
+				console.log("O nome fornecido parece inválido ou vazio. Verifique e tente novamente!");
+				return res.render('error404');
+			};
 
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
-				where: { cpf: cpf },
-				where: { email: data.email },
+				where: {
+					cpf: cpf,
+					email: data.email
+				},
 				defaults: { ...data }
 			});
 
-			// Gera um token para mandar no response e autenticar usuario
-			// const token = jwt.sign({ user: result.dataValues.id });
+			req.session.usuario = result
 
-			return res.status(200).json({ result: result });
+			return res.redirect('/me', 201);
 
 		} catch (err) {
-			return res.status(400).json({
-				result: "Erro ao criar usuário",
-				message: err.message
-			});
+			console.log(err)
+			return res.render('error404')
 		};
 	},
 
@@ -173,8 +178,8 @@ module.exports = {
 
 			// Compara a senha antiga com o hash gravado
 			if (!bcrypt.compareSync(data.senha0, user.senha)) {
-				throw new Error("Senha inválida") // Retorna Forbidden se senha não confere
-			}
+				throw new Error("Senha inválida"); // Retorna Forbidden se senha não confere
+			};
 
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
@@ -183,14 +188,14 @@ module.exports = {
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email && !data.email.match(regexEmail)) {
 				// Verifica se email null e se o formato é valido
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length < 3) {
 				// Valida se nome é null
-				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
-			}
+				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+			};
 
 			// Faz update com os novos dados passados para o user
 			user.update(data);
@@ -201,19 +206,20 @@ module.exports = {
 				result: "Erro ao alterar usuário",
 				message: err.message
 			});
-		}
+		};
 	},
 
 	delete: async (req, res) => {
+		console.log(id)
 		try {
 			const { id } = req.params;
 			const user = await Usuario.findByPk(id);
 			user.destroy();
 
 			return res.status(200).json(user);
-		} catch{
-			return res.status(400).json({ err });
-		}
+		} catch (err) {
+			return res.render('error404').json({ err });
+		};
 	},
-}
+};
 
