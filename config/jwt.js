@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken');
 
-const secret = 'iIsInR5cCI6IkpXVCJ9eyJhbGciOiJIUzI1P'
+const secret = 'iIsInR5cCI6IkpXVCJ9eyJhbGciOiJIUzI1P' //const secret = 'my-custom-secret
 
 const sign = payload => jwt.sign(payload, secret, { expiresIn: 43200 }); //12h
 const verify = token => jwt.verify(token, secret);

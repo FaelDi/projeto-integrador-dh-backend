@@ -1,0 +1,101 @@
+
+{
+    "atividade_principal": [
+      {
+        "text": "Lojas de departamentos ou magazines, exceto lojas francas (Duty free)",
+        "code": "47.13-0-04"
+      }
+    ],
+    "data_situacao": "03/11/2005",
+    "nome": "MAGAZINE LUIZA S/A",
+    "uf": "SP",
+    "telefone": "(16) 3711-2002",
+    "email": "fiscal.estadual@magazineluiza.com.br",
+    "atividades_secundarias": [
+      {
+        "text": "Atividades de intermediação e agenciamento de serviços e negócios em geral, exceto imobiliários",
+        "code": "74.90-1-04"
+      },
+      {
+        "text": "Correspondentes de instituições financeiras",
+        "code": "66.19-3-02"
+      },
+      {
+        "text": "Agências de viagens",
+        "code": "79.11-2-00"
+      },
+      {
+        "text": "Operadores turísticos",
+        "code": "79.12-1-00"
+      },
+      {
+        "text": "Serviços de reservas e outros serviços de turismo não especificados anteriormente",
+        "code": "79.90-2-00"
+      },
+      {
+        "text": "Comércio varejista de outros produtos não especificados anteriormente",
+        "code": "47.89-0-99"
+      },
+      {
+        "text": "Comércio varejista especializado de eletrodomésticos e equipamentos de áudio e vídeo",
+        "code": "47.53-9-00"
+      },
+      {
+        "text": "Comércio atacadista de mercadorias em geral, sem predominância de alimentos ou de insumos agropecuários",
+        "code": "46.93-1-00"
+      }
+    ],
+    "qsa": [
+      {
+        "qual": "10-Diretor",
+        "nome": "MARIA ISABEL BONFIM DE OLIVEIRA"
+      },
+      {
+        "qual": "16-Presidente",
+        "nome": "FREDERICO TRAJANO INACIO RODRIGUES"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "FABRICIO BITTAR GARCIA"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "ROBERTO BELLISSIMO RODRIGUES"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "ANDRE LUIZ DE SOUZA FATALA"
+      },
+      {
+        "qual": "10-Diretor",
+        "nome": "EDUARDO BENJAMIN GALANTERNICK"
+      }
+    ],
+    "situacao": "ATIVA",
+    "bairro": "CENTRO",
+    "logradouro": "R VOLUNTARIOS DA FRANCA",
+    "numero": "1465",
+    "cep": "14.400-490",
+    "municipio": "FRANCA",
+    "porte": "DEMAIS",
+    "abertura": "24/10/1966",
+    "natureza_juridica": "204-6 - Sociedade Anônima Aberta",
+    "fantasia": "MAGAZINE LUIZA",
+    "cnpj": "47.960.950/0001-21",
+    "ultima_atualizacao": "2020-05-19T12:36:32.275Z",
+    "status": "OK",
+    "tipo": "MATRIZ",
+    "complemento": "",
+    "efr": "",
+    "motivo_situacao": "",
+    "situacao_especial": "",
+    "data_situacao_especial": "",
+    "capital_social": "1770911472.00",
+    "extra": {
+
+    },
+    "billing": {
+      "free": true,
+      "database": true
+    }
+  } 

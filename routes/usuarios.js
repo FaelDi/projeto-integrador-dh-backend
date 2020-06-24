@@ -5,6 +5,7 @@ const UsuarioController = require("../controllers/UsuarioController");
 
 router.post("/cadastrar", UsuarioController.new);  // Não necessita da middleware Auth
 router.post("/login", UsuarioController.login);  // Não necessita da middleware Auth
+
 router.get('/', auth, UsuarioController.index);
 router.get('/:id', auth, UsuarioController.search);
 router.post('/:id', auth, UsuarioController.update);
