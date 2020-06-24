@@ -86,7 +86,7 @@ module.exports = {
 			req.session.usuario = user;
 
 			// Renderiza a view de usuario logado
-			return res.redirect('back');
+			return res.redirect('/me');
 		} catch (err) {
 			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
@@ -160,29 +160,35 @@ module.exports = {
 
 	update: async (req, res) => {
 		try {
-			const { id } = req.params;
+			const { id } = req.session.usuario;
 			const { ...data } = req.body;
 			const user = await Usuario.findByPk(id);
 
-			// Compara a senha antiga com o hash gravado
-			if (!bcrypt.compareSync(data.senha0, user.senha)) {
-				throw new Error("Senha inválida"); // Retorna Forbidden se senha não confere
-			};
+			console.log(data);
+			console.log(id);
 
 			// Hashes password to store in database uses senha length to generate salt
-			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
+			if (data.senha) {
+				data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
+			} else {
+				console.log(user.senha);
+			};
 
 			// Email validation
-			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
-			if (!data.email && !data.email.match(regexEmail)) {
-				// Verifica se email null e se o formato é valido
-				return res.render('login', { err: "Email inválido", display: "" });
+			if (data.email) {
+				let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+				if (!data.email && !data.email.match(regexEmail)) {
+					// Verifica se email null e se o formato é valido
+					return res.render('login', { err: "Email inválido", display: "" });
+				};
 			};
 
 			// Name validation
-			if (!(data.nome) && data.nome.length < 3) {
-				// Valida se nome é null
-				return res.render('login', { err: "Nome inválido", display: "" });
+			if (data.nome) {
+				if (!(data.nome) && data.nome.length < 3) {
+					// Valida se nome é null
+					return res.render('login', { err: "Nome inválido", display: "" });
+				};
 			};
 
 			// Faz update com os novos dados passados para o user
@@ -190,7 +196,7 @@ module.exports = {
 			return res.render('profile', { user })
 
 		} catch (err) {
-			return res.render('400', { err: err });
+			return res.render('404', { err: err });
 		};
 	},
 

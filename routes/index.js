@@ -17,7 +17,7 @@ router.get('/login', (req, res) => {
 router.get('/logout', (req, res) => {
   console.log(req.session.destroy());
 
-  return res.render('login', { err: 'Enviar', display: "hidden" });
+  return res.render('login', { err: 'Sessão encerrada com sucesso', display: '' });
 });
 
 router.get('/register', (req, res) => {
