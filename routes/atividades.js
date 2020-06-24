@@ -4,10 +4,10 @@ var router = express.Router();
 const AtividadeController = require("../controllers/AtividadeController");
 
 
-router.get('/', AtividadeController.index);
-router.get('/:id',AtividadeController.search);
-// router.post("/cadastrar/:fk_empresa/", AtividadeController.new);
-// router.put('/:id',AtividadeController.update);
-// router.delete('/:id',AtividadeController.delete);
+router.get('/', /*authMiddleware,*/ AtividadeController.index);
+router.get('/:id',/*authMiddleware,*/ AtividadeController.search);
+// router.post("/cadastrar/:fk_empresa/", /*authMiddleware,*/ AtividadeController.new);
+// router.put('/:id', /*authMiddleware,*/ AtividadeController.update);
+// router.delete('/:id', /*authMiddleware,*/ AtividadeController.delete);
 
 module.exports = router;

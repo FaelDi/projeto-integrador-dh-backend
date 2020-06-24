@@ -1,0 +1,19 @@
+<div class="col s11 m3">
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="/img/sem-logo.png" style="padding: 20px;">
+        </div>
+        <div class="card-content">
+            <span class="activator grey-text text-darken-2"><%= e.nome %>
+            </span>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Atividades
+                <i class="material-icons right">close</i>
+            </span>
+            <% e.atividade.forEach(ativ => { %>
+            <p> <%= ativ.text %> </p> <br>
+            <% }); %>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,14 @@
 const { Usuario, Pagamento, Empresa } = require("../models");
 const jwt = require('../config/jwt');
 const bcrypt = require("bcrypt");
+const fetch = require("node-fetch");
+
+
+const buscaCnpj = async (cep) => {
+	let res = await fetch(`https://viacep.com.br/ws/`+cep+`/json/`)
+	const data = await res.json();
+	return data;
+}
 
 // Função para validar CPF (fonte Receita Federal)
 function validarCPF(cpf) {
@@ -36,33 +44,57 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
+	cep: async (req,res) =>  {
+		try {
+			if (req.params.cep.length == 8) {
+			const adress = await buscaCnpj();
+			if (adress.status == "ERROR") {
+				res.status(400).json({ result: "Erro ao consultar cep!!" });
+			};
+			return res.status(200).json(adress);
+			}else{
+				res.status(400).json({ result: "Cep inválido!" });
+			}
+		} catch (err) {
+			return res.status(400).json({
+				result: "Erro ao consultar cep",
+				message: err.message
+			});
+		};
+		
+	},
 	login: async (req, res) => {
 		// const [, hash] = req.headers.authorization.split(' ');
 		// let [email, senha] = Buffer.from(hash, 'base64')
 		// 	.toString()
 		// 	.split(':')
-
 		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
 		// ------------------- APENAS PARA TESTE ----------------
-		let [cpf, senha] = req.headers.authorization.split(' ');
+		// let [cpf, senha] = req.headers.authorization.split(' ');
+
+		// Recebe o email e senha do usuario do form
+		const { email, senha } = req.body;
 
 		try {
 			// Busca o usuario no banco de dados pelo cpf
 			const user = await Usuario.findOne({
-				where: { cpf }
+				where: { email }
 			});
 
 			// Compara a senha com o hash gravado
 			if (!bcrypt.compareSync(senha, user.senha)) {
 				return res.send(401); // Retorna Forbidden se senha não confere
-			}
+			};
 
 			// Envia um json web token para autenticação do usuario
 			const token = jwt.sign({ user: user.id })
-			res.send({ user, token })
-		} catch (error) {
-			res.send(error)
-		}
+
+			// Renderiza a view de usuario logado
+			res.render("dash-index", { user, token });
+			// res.send({ user, token });
+		} catch (err) {
+			res.send({ erro: err })
+		};
 	},
 
 	index: async (req, res) => {
@@ -116,17 +148,17 @@ module.exports = {
 			// Busca um usuario pelo cpf e se não existir o cria
 			const [result] = await Usuario.findOrCreate({
 				where: { cpf: cpf },
+				where: { email: data.email },
 				defaults: { ...data }
 			});
 
 			// Gera um token para mandar no response e autenticar usuario
-			const token = jwt.sign({ user: result.dataValues.id });
+			// const token = jwt.sign({ user: result.dataValues.id });
 
-			// res.send(cpf, data);
-			return res.status(201).json({ result: result.dataValues, token: token });
+			return res.status(200).json({ result: result });
 
 		} catch (err) {
-			return res.status(200).json({
+			return res.status(400).json({
 				result: "Erro ao criar usuário",
 				message: err.message
 			});
@@ -138,6 +170,11 @@ module.exports = {
 			const { id } = req.params;
 			const { ...data } = req.body;
 			const user = await Usuario.findByPk(id);
+
+			// Compara a senha antiga com o hash gravado
+			if (!bcrypt.compareSync(data.senha0, user.senha)) {
+				throw new Error("Senha inválida") // Retorna Forbidden se senha não confere
+			}
 
 			// Hashes password to store in database uses senha length to generate salt
 			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
@@ -155,11 +192,15 @@ module.exports = {
 				return res.status(400).json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
 			}
 
+			// Faz update com os novos dados passados para o user
 			user.update(data);
 			return res.status(200).json(user);
 
-		} catch{
-			return res.status(400).json({ err });
+		} catch (err) {
+			return res.status(401).json({
+				result: "Erro ao alterar usuário",
+				message: err.message
+			});
 		}
 	},
 
@@ -174,6 +215,5 @@ module.exports = {
 			return res.status(400).json({ err });
 		}
 	},
-
 }
 

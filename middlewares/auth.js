@@ -2,15 +2,16 @@ const { Usuario, Pagamento, Empresa } = require("../models");
 const jwt = require('../config/jwt');
 
 const authMiddleware = async (req, res, next) => {
-  const [, token] = req.headers.authorization.split(' ')
-  console.log(req.headers.authorization)
   try {
+    // [, token] taken the second element splited
+    const [, token] = req.headers.authorization ? req.headers.authorization.split(' ') : null;
+    // console.log(req.headers.authorization)
     const payload = await jwt.verify(token);
-    console.log(payload.user);
-    
+    // console.log(payload.user);
+
     const user = await Usuario.findByPk(payload.user);
-    console.log(user);
-    
+    // console.log(user);
+
     if (!user) {
       return res.send(401);
     };
@@ -19,7 +20,8 @@ const authMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(401).send(error)
+    console.log(error)
+    res.sendStatus(401);
   };
 };
 

@@ -22,7 +22,7 @@ module.exports = {
 	new: async (req, res) => {
 
 		const { ...data } = req.body;
-		
+
 		let avaliacoes = await Avaliacao.create(data)
 
 		if (avaliacoes !== null) {

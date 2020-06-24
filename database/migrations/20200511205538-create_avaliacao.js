@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      titulo: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       comentario: {
         type: Sequelize.STRING,
         allowNull: false

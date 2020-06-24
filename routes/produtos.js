@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
+const authMiddleware = require("../middlewares/auth");
 const ProdutoController = require("../controllers/ProdutoController");
 
-router.get('/', ProdutoController.index);
-router.get('/:id',ProdutoController.search);
-// router.post("/cadastrar/:fk_usuario/", ProdutoController.new);
-// router.put('/:id',ProdutoController.update);
-router.delete('/:id',ProdutoController.delete);
+router.get('/',  /*authMiddleware,*/ ProdutoController.index);
+router.get('/:id',  /*authMiddleware,*/ ProdutoController.search);
+// router.post("/cadastrar/:fk_usuario/", authMiddleware, ProdutoController.new);
+// router.put('/:id', authMiddleware, ProdutoController.update);
+router.delete('/:id',  /*authMiddleware,*/ ProdutoController.delete);
 
 module.exports = router;
