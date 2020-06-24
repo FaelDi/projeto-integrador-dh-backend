@@ -13,7 +13,11 @@
         </div>
 
         <div class="login-form">
-          <span class="new badge red" data-badge-caption="" style="top: 10px" <%=display%>><%- err %></span>
+          <div class="row">
+            <div class="col s12 pulse">
+              <span <%=display%> class="new badge red pul" data-badge-caption="" style="top: 10px"><%- err %></span>
+            </div>
+          </div>
 
           <form action="/usuarios/login" method="POST" class="col s12" style="top: 10px;">
 

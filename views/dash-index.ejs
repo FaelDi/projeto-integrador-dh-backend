@@ -16,7 +16,7 @@
           <li class="nav-item" role="presentation"><a class="nav-link" href=""><i
                 class="material-icons">bookmark</i><span>Histórico</span></a></li>
           <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i
-                class="fas fa-table"></i><span>Forncedores</span></a></li>
+                class="fas fa-table"></i><span>Fornecedores</span></a></li>
           <li class="nav-item" role="presentation"></li>
           <li class="nav-item" role="presentation"></li>
           <li class="nav-item" role="presentation"></li>
@@ -92,7 +92,8 @@
                     role="menu">
                     <h6 class="dropdown-header" style="background-color: rgb(103,119,168);">alerts center</h6>
                     <a class="d-flex align-items-center dropdown-item" href="#">
-                      <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="/assets/img/imgbox.png"></div>
+                      <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="/assets/img/imgbox.png">
+                      </div>
                       <div class="font-weight-bold" style="width: 261px;">
                         <div class="text-truncate" style="width: 252px;"><span>Preciso confirmar a dimensão dos
                             produtos</span></div>
@@ -108,7 +109,7 @@
               <li class="nav-item dropdown no-arrow" role="presentation">
                 <div class="nav-item dropdown" href="profile.html"><a class="dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false" href="index-dash-fornecedor.html"><span
-                      class="d-none d-lg-inline mr-2 text-gray-600 small">Lorena Sans</span><img
+                      class="d-none d-lg-inline mr-2 text-gray-600 small"> <%= user.nome %> </span><img
                       class="border rounded-circle img-profile" src="/assets/img/avatars/avatar5.jpeg"></a>
                   <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a
                       class="dropdown-item" role="presentation" href="profile.html"><i
@@ -320,4 +321,4 @@
         </div>
       </div>
 
-    <%- include('parts/dash-foot'); %>
+      <%- include('parts/dash-foot'); %>
