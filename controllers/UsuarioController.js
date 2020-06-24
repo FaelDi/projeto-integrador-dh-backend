@@ -52,51 +52,42 @@ module.exports = {
 			if (req.params.cep.length == 8) {
 				const address = await consultaCEP();
 				if (address.status == "ERROR") {
-					res.render('error404');
+					res.render('404');;
 				};
 				return res.status(200).json(address);
 			} else {
-				res.render('error404').json({ result: "Cep inválido!" });
+				res.render('404', { err: "Cep inválido!" });
 			}
 		} catch (err) {
-			return res.render('error404').json({
-				result: "Erro ao consultar cep",
-				message: err.message
-			});
+			return res.render('404', { err: err });
 		};
 
 	},
 
 	login: async (req, res) => {
-		// const [, hash] = req.headers.authorization.split(' ');
-		// let [email, senha] = Buffer.from(hash, 'base64')
-		// 	.toString()
-		// 	.split(':')
-		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
-		// ------------------- APENAS PARA TESTE ----------------
-		// let [cpf, senha] = req.headers.authorization.split(' ');
-
-		// Recebe o email e senha do usuario do form
 		const { email, senha } = req.body;
-
 		try {
-			// Busca o usuario no banco de dados pelo cpf
+			// Busca o usuario no banco de dados pelo email
 			const user = await Usuario.findOne({
 				where: { email }
 			});
 
-			// Compara a senha com o hash gravado
-			if (!bcrypt.compareSync(senha, user.senha)) {
-				return res.send(401); // Retorna Forbidden se senha não confere
+			// Verifica se o user existe
+			if (!user) {
+				return res.render('login', { err: "Email não cadastrado", display: "" });
 			};
 
-			// Envia um json web token para autenticação do usuario
+			// Compara a senha com o hash gravado
+			if (!bcrypt.compareSync(senha, user.senha)) {
+				return res.render('login', { err: "Email ou senha não conferem!", display: "" });
+			};
+
+			req.session.usuario = user;
 
 			// Renderiza a view de usuario logado
 			res.render("dash-index", { user });
-			// res.send({ user, token });
 		} catch (err) {
-			return res.render('404');
+			return res.render('404', { err: err, display: "" });
 		};
 	},
 
@@ -110,7 +101,7 @@ module.exports = {
 		if (users !== null) {
 			return res.status(200).json(users);
 		} else {
-			return res.render('error404').json({ err: 'Não existe usuário cadastado!' });
+			return res.render('404', { err: 'Não existe usuário cadastado!' });
 		}
 	},
 
@@ -121,7 +112,7 @@ module.exports = {
 		if (user !== null) {
 			return res.status(200).json(user);
 		} else {
-			return res.render('error404').json({ err: 'Usuário  não foi encontrado!' });
+			return res.render('404', { err: 'Usuário  não foi encontrado!' });
 		}
 	},
 
@@ -136,19 +127,19 @@ module.exports = {
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email.match(regexEmail)) {
 				console.log('O email fornecido parece inválido. Verifique e tente novamente!');
-				return res.render('error404');
+				return res.render('404');;
 			};
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
 				console.log("O cpf fornecido parece inválido. Verifique e tente novamente!");
-				return res.render('error404');
+				return res.render('404');;
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
 				console.log("O nome fornecido parece inválido ou vazio. Verifique e tente novamente!");
-				return res.render('error404');
+				return res.render('404');;
 			};
 
 			// Busca um usuario pelo cpf e se não existir o cria
@@ -160,13 +151,12 @@ module.exports = {
 				defaults: { ...data }
 			});
 
-			req.session.usuario = result
+			req.session.usuario = result;
 
-			return res.redirect('/me', 201);
+			res.render("dash-index", { user });
 
 		} catch (err) {
-			console.log(err)
-			return res.render('error404')
+			return res.render('404', { err: err });
 		};
 	},
 
@@ -188,13 +178,13 @@ module.exports = {
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email && !data.email.match(regexEmail)) {
 				// Verifica se email null e se o formato é valido
-				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+				return res.render('404', { err: "Erro ao criar usuário. O email fornecido parece inválido. Verifique e tente novamente!" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length < 3) {
 				// Valida se nome é null
-				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+				return res.render('404', { err: "Erro ao criar usuário. O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
 			};
 
 			// Faz update com os novos dados passados para o user
@@ -202,15 +192,11 @@ module.exports = {
 			return res.status(200).json(user);
 
 		} catch (err) {
-			return res.status(401).json({
-				result: "Erro ao alterar usuário",
-				message: err.message
-			});
+			return res.render('401', { err: err });
 		};
 	},
 
 	delete: async (req, res) => {
-		console.log(id)
 		try {
 			const { id } = req.params;
 			const user = await Usuario.findByPk(id);
@@ -218,7 +204,7 @@ module.exports = {
 
 			return res.status(200).json(user);
 		} catch (err) {
-			return res.render('error404').json({ err });
+			return res.render('404', { err: err });
 		};
 	},
 };
