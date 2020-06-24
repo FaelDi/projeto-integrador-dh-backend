@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 });
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('/404', function (req, res) {
-  res.send('what???', 404);
+  return res.render('404', { err: '' });
 });
 
 // error handler

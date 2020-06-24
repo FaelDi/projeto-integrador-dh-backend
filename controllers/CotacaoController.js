@@ -8,11 +8,16 @@ module.exports = {
 				// { model: Usuario, as: 'usuario' },
 			],
 		});
+
+		let user = req.session.usuario;
+
+		console.log(user);
+
 		if (cotacoes !== null) {
-			res.send(cotacoes);
+			res.render("cotacoes", { user });
 		} else {
 			res.send("Nao há cotacoes cadastrados");
-		}
+		};
 	},
 	search: async (req, res) => {
 		let id = req.params.id
