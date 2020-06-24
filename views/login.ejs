@@ -1,49 +1,40 @@
 <%- include('parts/head', {title:'Login', page: 'login'}); %>
 
 <div class="main_container">
-
-  <!-- <h1 style="text-align: center;"><%= msg %></h1> -->
   <section class="home-bg">
     <div class="home">
-      <!-- <div class="main_container"> -->
-      <!-- <section class="login-bg"> -->
       <div class="bloco">
         <div class="login-info">
           <h1>Login</h1>
           <p>Entre com seu e-mail e senha e seja feliz!</p>
           <a class="back-link" href="/register">
-            <!-- <Link class="back-link" to="/register"> -->
-            <!-- <FiArrowLeft size={16} color="#07beb8" /> -->
             Não tenho Login!?
-            <!-- </Link> -->
           </a>
         </div>
 
         <div class="login-form">
-          <form action="/usuarios/login" method="POST" class="col s12">
+          <div class="row">
+            <div class="col s12 pulse">
+              <span <%=display%> class="new badge red pul" data-badge-caption="" style="top: 10px"><%- err %></span>
+            </div>
+          </div>
+
+          <form action="/usuarios/login" method="POST" class="col s12" style="top: 10px;">
 
             <div class="input-field col s6">
-              <input id="email" type="email" name="email" class="validate">
+              <input id="email" type="email" name="email" class="validate" required>
               <label for="email" style="left: 0;">Digite seu melhor e-mail</label>
             </div>
-            <!-- <input type="email" name="email" id="email" placeholder="Digite seu melhor e-mail" /> -->
 
             <div class="input-field col s6" style="top: 10px;">
-              <input id="senha" type="password" name="senha" class="validate">
+              <input id="senha" type="password" name="senha" class="validate" required>
               <label for="email" style="left: 0;">Digite sua senha</label>
             </div>
 
-            <!-- <input type="password" name="senha" id="senha" placeholder="Digite sua senha" /> -->
-
-            <!-- <Link class='back-link' to='/dashboard/'> -->
             <button class="button" type="submit">Enviar</button>
-            <!-- </Link> -->
-
           </form>
         </div>
       </div>
-      <!-- </section> -->
-      <!-- </div> -->
     </div>
   </section>
 

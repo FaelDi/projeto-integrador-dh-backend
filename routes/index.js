@@ -1,30 +1,29 @@
 var express = require('express');
 var router = express.Router();
-const { Empresa } = require("../models");
 
-const authMiddleware = require("../middlewares/auth");
-
-// router.get('/', authMiddleware, (req, res) => {
-//   res.send({ message: 'Servidor Rodando' });
-// });
+const auth = require('../middlewares/auth');
+const UsuarioController = require('../controllers/UsuarioController');
 
 router.get('/', (req, res) => {
-  res.render('index', { msg: 'teste' });
+  res.render('index');
 });
 
 /* !!!!!!!!! COLOQUEI EMPRESA PARA EVITAR CONFLITO COM EMPRESAS */ // MOVIDO PARA EmpresaController.js
 
 router.get('/login', (req, res) => {
-  res.render('login', { msg: 'login' });
+  return res.render('login', { err: 'Enviar', display: "hidden" });
+});
+
+router.get('/logout', (req, res) => {
+  console.log(req.session.destroy());
+
+  return res.render('login', { err: 'Sessão encerrada com sucesso', display: '' });
 });
 
 router.get('/register', (req, res) => {
-  res.render('register', { msg: 'Cadastre-se' });
+  return res.render('register', { err: '' });
 });
 
-router.get('/me', /*authMiddleware,*/ (req, res) => {
-  res.send(req.auth);
-});
-
+router.get('/me', auth, UsuarioController.show);
 
 module.exports = router;

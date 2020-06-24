@@ -1,26 +1,11 @@
-const { Usuario, Pagamento, Empresa } = require("../models");
+// Função de login e verificação de autenticação
 
-const authMiddleware = async (req, res, next) => {
-  try {
-    // [, token] taken the second element splited
-    const [, token] = req.headers.authorization ? req.headers.authorization.split(' ') : null;
-    // console.log(req.headers.authorization)
-    // console.log(payload.user);
-
-    const user = await Usuario.findByPk(payload.user);
-    // console.log(user);
-
-    if (!user) {
-      return res.send(401);
-    };
-
-    req.auth = user;
-
+module.exports = (req, res, next) => {
+  // Verifica se há uma sessão de usuario criada
+  if (req.session.usuario) {
     next();
-  } catch (error) {
-    console.log(error)
-    res.sendStatus(401);
+  } else {
+    // Requere o login para a área restrita
+    return res.render("login", { err: "É necessário login para acessar a página!", display: '' });
   };
 };
-
-module.exports = authMiddleware;

@@ -42,61 +42,53 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
-	// Retorna a página de login
+	// Retorna a dashboard para usuario autenticado
 	show: async (req, res) => {
-		res.render("dash-index", { user });
+		let user = await req.session.usuario;
+		return res.render("dash-index", { user });
 	},
-	// Modulo CEP faz a consulta do cep e não mais do cnpj
+	// Modulo CEP faz a consulta do cep
 	cep: async (req, res) => {
 		try {
 			if (req.params.cep.length == 8) {
 				const address = await consultaCEP();
 				if (address.status == "ERROR") {
-					res.render('error404');
+					res.render('404');;
 				};
 				return res.status(200).json(address);
 			} else {
-				res.render('error404').json({ result: "Cep inválido!" });
+				res.render('404', { err: "Cep inválido!" });
 			}
 		} catch (err) {
-			return res.render('error404').json({
-				result: "Erro ao consultar cep",
-				message: err.message
-			});
+			return res.render('404', { err: err });
 		};
 
 	},
 
 	login: async (req, res) => {
-		// const [, hash] = req.headers.authorization.split(' ');
-		// let [email, senha] = Buffer.from(hash, 'base64')
-		// 	.toString()
-		// 	.split(':')
-		// Recebe email e a senha spliting no espaço do que é passado em AUTHORIZATION
-		// ------------------- APENAS PARA TESTE ----------------
-		// let [cpf, senha] = req.headers.authorization.split(' ');
-
-		// Recebe o email e senha do usuario do form
 		const { email, senha } = req.body;
-
 		try {
-			// Busca o usuario no banco de dados pelo cpf
+			// Busca o usuario no banco de dados pelo email
 			const user = await Usuario.findOne({
 				where: { email }
 			});
 
-			// Compara a senha com o hash gravado
-			if (!bcrypt.compareSync(senha, user.senha)) {
-				return res.send(401); // Retorna Forbidden se senha não confere
+			// Verifica se o user existe
+			if (!user) {
+				return res.render('login', { err: "Email não cadastrado", display: "" });
 			};
 
-			// Envia um json web token para autenticação do usuario
+			// Compara a senha com o hash gravado
+			if (!bcrypt.compareSync(senha, user.senha)) {
+				return res.render('login', { err: "Email ou senha não conferem!", display: "" });
+			};
+
+			req.session.usuario = user;
 
 			// Renderiza a view de usuario logado
-			res.render("dash-index", { user });
-			// res.send({ user, token });
+			return res.redirect('/me');
 		} catch (err) {
-			return res.render('404');
+			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
 	},
 
@@ -107,10 +99,10 @@ module.exports = {
 				{ model: Empresa, as: 'empresa' }
 			],
 		});
-		if (users !== null) {
+		if (users) {
 			return res.status(200).json(users);
 		} else {
-			return res.render('error404').json({ err: 'Não existe usuário cadastado!' });
+			return res.render('404', { err: 'Não existe usuário cadastado!' });
 		}
 	},
 
@@ -118,10 +110,10 @@ module.exports = {
 		let id = req.params.id;
 
 		let user = await Usuario.findByPk(id);
-		if (user !== null) {
-			return res.status(200).json(user);
+		if (user) {
+			return res.render('profile', { user })
 		} else {
-			return res.render('error404').json({ err: 'Usuário  não foi encontrado!' });
+			return res.render('404', { err: 'Usuário  não foi encontrado!' });
 		}
 	},
 
@@ -135,24 +127,21 @@ module.exports = {
 			// Email validation
 			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
 			if (!data.email.match(regexEmail)) {
-				console.log('O email fornecido parece inválido. Verifique e tente novamente!');
-				return res.render('error404');
+				return res.render('login', { err: "Email inválido", display: "" });
 			};
 
 			// CPF Validation
 			if (!validarCPF(cpf)) {
-				console.log("O cpf fornecido parece inválido. Verifique e tente novamente!");
-				return res.render('error404');
+				return res.render('login', { err: "CPF inválido", display: "" });
 			};
 
 			// Name validation
 			if (!(data.nome) && data.nome.length > 2) {
-				console.log("O nome fornecido parece inválido ou vazio. Verifique e tente novamente!");
-				return res.render('error404');
+				return res.render('login', { err: "Nome inválido", display: "" });
 			};
 
 			// Busca um usuario pelo cpf e se não existir o cria
-			const [result] = await Usuario.findOrCreate({
+			const [user] = await Usuario.findOrCreate({
 				where: {
 					cpf: cpf,
 					email: data.email
@@ -160,65 +149,66 @@ module.exports = {
 				defaults: { ...data }
 			});
 
-			req.session.usuario = result
+			req.session.usuario = user;
 
-			return res.redirect('/me', 201);
-
+			// res.render("dash-index", { user });
+			return res.redirect('/me');
 		} catch (err) {
-			console.log(err)
-			return res.render('error404')
+			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
 	},
 
 	update: async (req, res) => {
 		try {
-			const { id } = req.params;
+			const { id } = req.session.usuario;
 			const { ...data } = req.body;
 			const user = await Usuario.findByPk(id);
 
-			// Compara a senha antiga com o hash gravado
-			if (!bcrypt.compareSync(data.senha0, user.senha)) {
-				throw new Error("Senha inválida"); // Retorna Forbidden se senha não confere
-			};
+			console.log(data);
+			console.log(id);
 
 			// Hashes password to store in database uses senha length to generate salt
-			data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
+			if (data.senha) {
+				data.senha = bcrypt.hashSync(data.senha, (data.senha.length % 5));
+			} else {
+				console.log(user.senha);
+			};
 
 			// Email validation
-			let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
-			if (!data.email && !data.email.match(regexEmail)) {
-				// Verifica se email null e se o formato é valido
-				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O email fornecido parece inválido. Verifique e tente novamente!" });
+			if (data.email) {
+				let regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+				if (!data.email && !data.email.match(regexEmail)) {
+					// Verifica se email null e se o formato é valido
+					return res.render('login', { err: "Email inválido", display: "" });
+				};
 			};
 
 			// Name validation
-			if (!(data.nome) && data.nome.length < 3) {
-				// Valida se nome é null
-				return res.render('error404').json({ result: "Erro ao criar usuário", message: "O nome fornecido parece inválido ou vazio. Verifique e tente novamente!" });
+			if (data.nome) {
+				if (!(data.nome) && data.nome.length < 3) {
+					// Valida se nome é null
+					return res.render('login', { err: "Nome inválido", display: "" });
+				};
 			};
 
 			// Faz update com os novos dados passados para o user
 			user.update(data);
-			return res.status(200).json(user);
+			return res.render('profile', { user })
 
 		} catch (err) {
-			return res.status(401).json({
-				result: "Erro ao alterar usuário",
-				message: err.message
-			});
+			return res.render('404', { err: err });
 		};
 	},
 
 	delete: async (req, res) => {
-		console.log(id)
 		try {
 			const { id } = req.params;
 			const user = await Usuario.findByPk(id);
 			user.destroy();
 
-			return res.status(200).json(user);
+			return res.redirect(200, '/');
 		} catch (err) {
-			return res.render('error404').json({ err });
+			return res.render('400', { err: err });
 		};
 	},
 };

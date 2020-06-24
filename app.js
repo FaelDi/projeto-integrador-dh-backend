@@ -3,11 +3,13 @@ var express = require('express');
 var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
-// var logger = require('morgan');
+
+// Import de express-session
+const session = require('express-session');
 
 var app = express();
 
-app.use(cors())
+app.use(cors());
 
 var indexRouter = require('./routes');
 var usuariosRoutes = require('./routes/usuarios');
@@ -35,6 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views/assets')));
 app.use(logMiddleware);
 
+// Session manager
+app.use(session({ secret: "ORCA-DEV", resave: true, saveUninitialized: false }));
+
 app.use('/', indexRouter);
 // app.use('/#', indexRouter);
 app.use('/usuarios', usuariosRoutes);
@@ -48,12 +53,12 @@ app.use('/entregas', entregasRouter);
 app.use('/cotacoesProdutos', cotacoesProdutosRouter);
 app.use('/avaliacoes', avaliacoesRouter);
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 //The 404 Route (ALWAYS Keep this as the last route)
-app.get('/404', function(req, res){
-  res.send('what???', 404);
+app.get('/404', function (req, res) {
+  return res.render('404', { err: '' });
 });
 
 // error handler

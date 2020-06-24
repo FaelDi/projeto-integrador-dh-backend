@@ -1,0 +1,100 @@
+<nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background-color: red;">
+    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop"
+            type="button"><i class="fas fa-bars"></i></button>
+        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group"><input class="bg-light form-control border-0 small" type="text"
+                    placeholder="Pesquisar">
+                <div class="input-group-append"><button class="btn btn-primary py-0" type="button"
+                        style="background-color: rgb(64,71,109);"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        <ul class="nav navbar-nav flex-nowrap ml-auto">
+            <li class="nav-item dropdown show d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
+                    data-toggle="dropdown" aria-expanded="true" href="#"><i class="fas fa-search"></i></a>
+                <div class="dropdown-menu show dropdown-menu-right p-3 animated--grow-in" role="menu"
+                    aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto navbar-search w-100">
+                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text"
+                                placeholder="Buscar">
+                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i
+                                        class="fas fa-search"></i></button></div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                        aria-expanded="false" href="#"><span class="badge badge-danger badge-counter"></span><i
+                            class="material-icons fa-fw">warning</i></a>
+                    <div class="dropdown-menu dropdown-menu-right swing animated dropdown-list dropdown-menu-right animated--grow-in"
+                        role="menu">
+                        <h6 class="dropdown-header" style="background-color: rgb(103,119,168);">ALERTA
+                        </h6>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="mr-3">
+                                <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                            </div>
+                            <div><span class="small text-gray-500">2 de Junho de 2020</span>
+                                <p>Assinar contrato de cotação B</p>
+                            </div>
+                        </a>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="mr-3">
+                                <div class="bg-warning icon-circle"><i
+                                        class="fas fa-exclamation-triangle text-white"></i></div>
+                            </div>
+                            <div><span class="small text-gray-500">2 de Junho de 2020</span>
+                                <p>Prazo de pagamento está próximo do fim!</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                <div class="nav-item dropdown no-arrow">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                        <i class="material-icons fa-fw">message</i>
+                        <span class="badge badge-danger badge-counter"></span></a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
+                        role="menu">
+                        <h6 class="dropdown-header" style="background-color: rgb(103,119,168);">Alerts Center</h6>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="dropdown-list-image mr-3"><img class="rounded-circle"
+                                    src="assets/img/imgbox.png"></div>
+                            <div class="font-weight-bold" style="width: 261px;">
+                                <div class="text-truncate" style="width: 252px;">
+                                    <span>Preciso confirmar a dimensão dos produtos</span>
+                                </div>
+                                <p class="small text-gray-500 mb-0">Fornecedor X - Licitação B</p>
+                            </div>
+                        </a>
+                        <a class="text-center dropdown-item small text-gray-500" href="#">Show All
+                            Alerts</a>
+                    </div>
+                </div>
+                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                </div>
+            </li>
+            <div class="d-none d-sm-block topbar-divider"></div>
+            <li class="nav-item dropdown no-arrow" role="presentation">
+                <div class="nav-item dropdown" href="/usuarios/<%= user.id %>">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                        href="/usuarios/<%= user.id %>">
+                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%- user.nome %></span>
+                        <img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.jpeg">
+                    </a>
+                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                        <a class="dropdown-item" role="presentation" href="/usuarios/<%= user.id %>">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Perfil
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" role="presentation" href="/logout">
+                            <i class="icon ion-android-exit fa-sm fa-fw mr-2 text-gray-400"></i>Sair
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
