@@ -42,9 +42,13 @@ function validarCPF(cpf) {
 };
 
 module.exports = {
-	// Retorna a página de login
+	// Retorna a dashboard
 	show: async (req, res) => {
-		res.render("dash-index", { user });
+		let user = await req.session.usuario;
+
+		console.log(user);
+
+		return res.render("dash-index", { user });
 	},
 	// Modulo CEP faz a consulta do cep e não mais do cnpj
 	cep: async (req, res) => {
@@ -85,7 +89,8 @@ module.exports = {
 			req.session.usuario = user;
 
 			// Renderiza a view de usuario logado
-			res.render("dash-index", { user });
+			res.redirect('/me');
+			// return res.render("dash-index", { user });
 		} catch (err) {
 			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
@@ -150,8 +155,8 @@ module.exports = {
 
 			req.session.usuario = user;
 
-			res.render("dash-index", { user });
-
+			// res.render("dash-index", { user });
+			return res.redirect('/me');
 		} catch (err) {
 			return res.render('login', { err: "Algum erro ocorreu. Tente novamente!", display: "" });
 		};
