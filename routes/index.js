@@ -11,11 +11,17 @@ router.get('/', (req, res) => {
 /* !!!!!!!!! COLOQUEI EMPRESA PARA EVITAR CONFLITO COM EMPRESAS */ // MOVIDO PARA EmpresaController.js
 
 router.get('/login', (req, res) => {
-  res.render('login', { err: 'Enviar', display: "hidden" });
+  return res.render('login', { err: 'Enviar', display: "hidden" });
+});
+
+router.get('/logout', (req, res) => {
+  console.log(req.session.destroy());
+
+  return res.render('login', { err: 'Enviar', display: "hidden" });
 });
 
 router.get('/register', (req, res) => {
-  res.render('register', { err: '' });
+  return res.render('register', { err: '' });
 });
 
 router.get('/me', auth, UsuarioController.show);
