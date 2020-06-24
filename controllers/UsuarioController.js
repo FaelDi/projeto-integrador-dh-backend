@@ -111,7 +111,7 @@ module.exports = {
 
 		let user = await Usuario.findByPk(id);
 		if (user !== null) {
-			return res.status(200).json(user);
+			return res.render('profile', { user })
 		} else {
 			return res.render('404', { err: 'Usuário  não foi encontrado!' });
 		}

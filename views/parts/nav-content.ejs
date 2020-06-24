@@ -78,18 +78,18 @@
             </li>
             <div class="d-none d-sm-block topbar-divider"></div>
             <li class="nav-item dropdown no-arrow" role="presentation">
-                <div class="nav-item dropdown" href="profile.html">
+                <div class="nav-item dropdown" href="/usuarios/<%= user.id %>">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
-                        href="index-dash-fornecedor-nao-utilizar.html">
+                        href="/usuarios/<%= user.id %>">
                         <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%- user.nome %></span>
                         <img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.jpeg">
                     </a>
                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                        <a class="dropdown-item" role="presentation" href="profile.html">
+                        <a class="dropdown-item" role="presentation" href="/usuarios/<%= user.id %>">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Perfil
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" role="presentation" href="index.html">
+                        <a class="dropdown-item" role="presentation" href="/usuarios/logout">
                             <i class="icon ion-android-exit fa-sm fa-fw mr-2 text-gray-400"></i>Sair
                         </a>
                     </div>
